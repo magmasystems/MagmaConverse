@@ -16,6 +16,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MagmaConverse.Interfaces", 
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MagmaConverse.Messaging.Kafka", "MagmaConverse.Messaging.Kafka\MagmaConverse.Messaging.Kafka.csproj", "{C51E80D9-8D04-4869-BBAB-0811C7AFF34E}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MagmaConverse.Utilities", "MagmaConverse.Utilities\MagmaConverse.Utilities.csproj", "{27D01C38-207E-4907-B315-AC69C7212AD4}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -42,5 +44,9 @@ Global
 		{C51E80D9-8D04-4869-BBAB-0811C7AFF34E}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{C51E80D9-8D04-4869-BBAB-0811C7AFF34E}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{C51E80D9-8D04-4869-BBAB-0811C7AFF34E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{27D01C38-207E-4907-B315-AC69C7212AD4}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{27D01C38-207E-4907-B315-AC69C7212AD4}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{27D01C38-207E-4907-B315-AC69C7212AD4}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{27D01C38-207E-4907-B315-AC69C7212AD4}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 EndGlobal
