@@ -11,7 +11,9 @@
     <OutputPath>..\bin\Release\netcoreapp3.0</OutputPath>
   </PropertyGroup>
   <ItemGroup>
-    <ProjectReference Include="..\MagmaConverse.Data\MagmaConverse.Data.csproj" />
-    <ProjectReference Include="..\MagmaConverse.Framework\MagmaConverse.Framework.csproj" />
+    <PackageReference Include="log4net" Version="2.0.8" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\MagmaConverse.Messaging.Kafka\MagmaConverse.Messaging.Kafka.csproj" />
   </ItemGroup>
 </Project>

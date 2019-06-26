@@ -11,7 +11,10 @@
     <OutputPath>..\bin\Release\netcoreapp3.0</OutputPath>
   </PropertyGroup>
   <ItemGroup>
+    <ProjectReference Include="..\MagmaConverse.Models\MagmaConverse.Models.csproj" />
     <ProjectReference Include="..\MagmaConverse.Data\MagmaConverse.Data.csproj" />
-    <ProjectReference Include="..\MagmaConverse.Framework\MagmaConverse.Framework.csproj" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Remove=".DS_Store" />
   </ItemGroup>
 </Project>
