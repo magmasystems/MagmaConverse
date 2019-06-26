@@ -265,6 +265,7 @@ namespace MagmaConverse.Services
         ResponseStatus<bool> ActivateUser(string formId, string activationCode);
     }
 
+
     [ServiceBehavior(InstanceContextMode = InstanceContextMode.Single, IncludeExceptionDetailInFaults = true, AddressFilterMode = AddressFilterMode.Any)]
     [AspNetCompatibilityRequirements(RequirementsMode = AspNetCompatibilityRequirementsMode.Allowed)]
     [SwaggerWcf("/FormManagerService")]
@@ -276,7 +277,7 @@ namespace MagmaConverse.Services
         IFormManagerRestServiceContract, IDisposable
     {
         #region Variables
-        private static readonly ILog Logger = LogManager.GetLogger(typeof(FormManagerRestService).Name);
+        private static readonly ILog Logger = LogManager.GetLogger(typeof(FormManagerRestService));
         public IFormManagerService Service { get; }
         #endregion
 
@@ -758,7 +759,7 @@ namespace MagmaConverse.Services
             {
                 IncomingWebRequestContext request = WebOperationContext.Current.IncomingRequest;
                 WebHeaderCollection headers = request.Headers;
-                token = headers["DIYOnboarding-AuthToken"];
+                token = headers["MagmaConverse-AuthToken"];
             }
 
             return token;

@@ -11,11 +11,6 @@
     <OutputPath>..\bin\Release</OutputPath>
   </PropertyGroup>
   <ItemGroup>
-    <ProjectReference Include="..\MagmaConverse.Models\MagmaConverse.Models.csproj" />
     <ProjectReference Include="..\MagmaConverse.Data\MagmaConverse.Data.csproj" />
-    <ProjectReference Include="..\MagmaConverse.Views\MagmaConverse.Views.csproj" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Remove=".DS_Store" />
   </ItemGroup>
 </Project>

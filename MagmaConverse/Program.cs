@@ -22,5 +22,11 @@ namespace MagmaConverse
                 {
                     webBuilder.UseStartup<Startup>();
                 });
+
+#if USE_WEBHOST
+        public static IWebHostBuilder CreateWebHostBuilder(string[] args) =>
+            WebHost.CreateDefaultBuilder(args)
+                .UseStartup<Startup>();
+#endif
     }
 }

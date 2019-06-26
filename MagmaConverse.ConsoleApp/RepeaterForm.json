@@ -1,0 +1,104 @@
+﻿{
+  "forms": [
+    {
+      "name": "RepeaterGroupForm",
+      "title": "Test Repeater Marc Form",
+      "description": "This is a form for testing a repeater group",
+      "fields": [
+        /* This is a field that comes befiore the repeater, and does nothing */
+        {
+          "name": "fieldOne",
+          "prompt": "Hit anything to start the repeater group",
+          "type": "edit",
+          "default": "foo",
+          "hidden": false,
+          "validation": {
+            "required": false
+          }
+        },
+        /* This is the start of the repeater group */
+        {
+          "name": "employeeDetailsGroup",
+          "type": "repeater",
+          "hidden": false,
+          "validation": {
+            "required": false
+          },
+          "properties": {
+            /* The "Add Another" checkbox is the last field of the repeater, and if you answer 'Yes', then the repeating group repeats again */
+            "groupname": "Employees",
+            "suffix": "${index}",
+            "end": "cbAddAnother",
+            "continuevalue": true
+          }
+        },
+        {
+          "name": "empName",
+          "prompt": "Name",
+          "type": "edit",
+          "default": "Marc",
+          "validation": {
+            "required": false
+          }
+        },
+        {
+          "name": "empAge",
+          "prompt": "Age",
+          "type": "edit",
+          "default": 35,
+          "validation": {
+            "required": false
+          }
+        },
+        {
+          "name": "empZip",
+          "prompt": "Zip",
+          "type": "edit",
+          "default": "11435",
+          "validation": {
+            "required": false
+          }
+        },
+        {
+          "name": "btnSave",
+          "prompt": "Save Employee",
+          "type": "button",
+          "hidden": false,
+          "validation": {
+            "required": false
+          },
+          "submissionFunctions": [
+            {
+              "workflow": "rest://${config:server.OnboardingServer}/DIYOnboardingService/form/${field:RepeaterGroupForm.Id}/employee/add",
+              "properties": {
+                "method": "post",
+                "body": "${field:employeeDetailsGroup}",
+                "bodyFormat": "json"
+              }
+            }
+          ]
+        },
+        /* This is the end of the repeater, and if you answer 'yes', then we loop back */
+        {
+          "name": "cbAddAnother",
+          "prompt": "Add another employee",
+          "type": "checkbox",
+          "validation": {
+            "required": false
+          }
+        },
+        /* This is the first field after the repeater */
+        {
+          "name": "fieldTwo",
+          "prompt": "Ended the repeater - press anything to exit",
+          "type": "edit",
+          "default": "baz",
+          "hidden": false,
+          "validation": {
+            "required": false
+          }
+        }
+      ]
+    }
+  ]
+}

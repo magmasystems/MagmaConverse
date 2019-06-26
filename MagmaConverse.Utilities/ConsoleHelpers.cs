@@ -5,7 +5,7 @@ using MagmaConverse.Framework;
 
 namespace MagmaConverse.Utilities
 {
-    public class ConsoleHelpers
+    public static class ConsoleHelpers
     {
         public const string CTRL_C_COMMAND = "!!!!CTRL+C!!!!";
 
