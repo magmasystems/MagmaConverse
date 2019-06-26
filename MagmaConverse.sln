@@ -28,6 +28,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MagmaConverse.Persistence",
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MagmaConverse.Mocks", "MagmaConverse.Mocks\MagmaConverse.Mocks.csproj", "{8915CC92-B995-4E2B-949F-9852AC695BA5}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MagmaConverse.Models", "MagmaConverse.Models\MagmaConverse.Models.csproj", "{F27D6BF2-B5CF-4654-BFE4-4063F1622188}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -78,5 +80,9 @@ Global
 		{8915CC92-B995-4E2B-949F-9852AC695BA5}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{8915CC92-B995-4E2B-949F-9852AC695BA5}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{8915CC92-B995-4E2B-949F-9852AC695BA5}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F27D6BF2-B5CF-4654-BFE4-4063F1622188}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F27D6BF2-B5CF-4654-BFE4-4063F1622188}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F27D6BF2-B5CF-4654-BFE4-4063F1622188}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F27D6BF2-B5CF-4654-BFE4-4063F1622188}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 EndGlobal
