@@ -18,6 +18,16 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MagmaConverse.Messaging.Kaf
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MagmaConverse.Utilities", "MagmaConverse.Utilities\MagmaConverse.Utilities.csproj", "{27D01C38-207E-4907-B315-AC69C7212AD4}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MagmaConverse.Data", "MagmaConverse.Data\MagmaConverse.Data.csproj", "{2F111C1D-0512-4D9A-9F79-7CE301DC2CCD}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SwaggerWcf", "SwaggerWcf\SwaggerWcf.csproj", "{CF502140-157F-4788-A833-7AAD45146DDE}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MagmaConverse.Persistence.MongoDB", "MagmaConverse.Persistence.MongoDB\MagmaConverse.Persistence.MongoDB.csproj", "{5387B130-2AF3-4068-A9F5-B789946577CB}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MagmaConverse.Persistence", "MagmaConverse.Persistence\MagmaConverse.Persistence.csproj", "{E63BC7DB-BD2F-4E4C-B371-F7212B1CC746}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MagmaConverse.Mocks", "MagmaConverse.Mocks\MagmaConverse.Mocks.csproj", "{8915CC92-B995-4E2B-949F-9852AC695BA5}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -48,5 +58,25 @@ Global
 		{27D01C38-207E-4907-B315-AC69C7212AD4}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{27D01C38-207E-4907-B315-AC69C7212AD4}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{27D01C38-207E-4907-B315-AC69C7212AD4}.Release|Any CPU.Build.0 = Release|Any CPU
+		{2F111C1D-0512-4D9A-9F79-7CE301DC2CCD}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{2F111C1D-0512-4D9A-9F79-7CE301DC2CCD}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{2F111C1D-0512-4D9A-9F79-7CE301DC2CCD}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{2F111C1D-0512-4D9A-9F79-7CE301DC2CCD}.Release|Any CPU.Build.0 = Release|Any CPU
+		{CF502140-157F-4788-A833-7AAD45146DDE}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{CF502140-157F-4788-A833-7AAD45146DDE}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{CF502140-157F-4788-A833-7AAD45146DDE}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{CF502140-157F-4788-A833-7AAD45146DDE}.Release|Any CPU.Build.0 = Release|Any CPU
+		{5387B130-2AF3-4068-A9F5-B789946577CB}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{5387B130-2AF3-4068-A9F5-B789946577CB}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{5387B130-2AF3-4068-A9F5-B789946577CB}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{5387B130-2AF3-4068-A9F5-B789946577CB}.Release|Any CPU.Build.0 = Release|Any CPU
+		{E63BC7DB-BD2F-4E4C-B371-F7212B1CC746}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E63BC7DB-BD2F-4E4C-B371-F7212B1CC746}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E63BC7DB-BD2F-4E4C-B371-F7212B1CC746}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E63BC7DB-BD2F-4E4C-B371-F7212B1CC746}.Release|Any CPU.Build.0 = Release|Any CPU
+		{8915CC92-B995-4E2B-949F-9852AC695BA5}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{8915CC92-B995-4E2B-949F-9852AC695BA5}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{8915CC92-B995-4E2B-949F-9852AC695BA5}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{8915CC92-B995-4E2B-949F-9852AC695BA5}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 EndGlobal
