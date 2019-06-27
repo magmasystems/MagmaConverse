@@ -14,4 +14,26 @@
     <PackageReference Include="Microsoft.AspNetCore.Mvc.NewtonsoftJson" Version="3.0.0-preview5-19227-01" />
   </ItemGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\SwaggerWcf\SwaggerWcf.csproj" />
+    <ProjectReference Include="..\MagmaConverse.Framework\MagmaConverse.Framework.csproj" />
+    <ProjectReference Include="..\MagmaConverse.Data\MagmaConverse.Data.csproj" />
+    <ProjectReference Include="..\MagmaConverse.Services\MagmaConverse.Services.csproj" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Remove="log4net.config" />
+    <Content Remove="App.config" />
+    <Content Remove="DIYOnboardingForm.json" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="log4net.config">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="App.config">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="DIYOnboardingForm.json">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+  </ItemGroup>
 </Project>
