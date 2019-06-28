@@ -404,17 +404,17 @@ namespace MagmaConverse.Controllers
         [SwaggerWcfResponse(HttpStatusCode.OK, "True if the field was added")]
         [SwaggerWcfResponse(HttpStatusCode.BadRequest, "Bad request", true)]
         [SwaggerWcfResponse(HttpStatusCode.InternalServerError, "Internal error", true)]
-        public ActionResult<ResponseStatus<bool>> AddField(
+        public ActionResult<ResponseStatus<bool>> AddFields(
             [SwaggerWcfParameter(Description = "The id of a form instance, as returned by the NewForm call", Required = true)]
             string id,
             [SwaggerWcfParameter(Description = "A description of the field", Required = true)]
-            [FromBody] FormTemplateFieldDefinition fieldDef
+            [FromBody] FormAddFieldsRequest request
             )
         {
             try
             { 
                 Logger.Info($"AddField({id}) called");
-                var response = this.Service.AddField(id, fieldDef);
+                var response = this.Service.AddFields(id, request);
 
                 Logger.Info($"AddField({id}) returned {MagmaConverse.Framework.Serialization.Json.Serialize(response)}");
                 return response;
@@ -428,78 +428,26 @@ namespace MagmaConverse.Controllers
         }
 
         /// <inheritdoc/>
-        [HttpPut("form/field/insert/{id}", Name = "InsertFieldAtIndex")]
+        [HttpPut("form/{id}/field/insert", Name = "InsertFieldAtIndex")]
         //[ValidateAntiForgeryToken]
         [SwaggerWcfTag("Form")]
         [SwaggerWcfTag("Field")]
         [SwaggerWcfResponse(HttpStatusCode.OK, "True if the field was inserted")]
         [SwaggerWcfResponse(HttpStatusCode.BadRequest, "Bad request", true)]
         [SwaggerWcfResponse(HttpStatusCode.InternalServerError, "Internal error", true)]
-        public ActionResult<ResponseStatus<bool>> InsertFieldAtIndex(
+        public ActionResult<ResponseStatus<bool>> InsertFields(
             [SwaggerWcfParameter(Description = "The id of a form instance, as returned by the NewForm call", Required = true)]
             string id,
-            [SwaggerWcfParameter(Description = "A description of the field", Required = true)]
-            [FromBody] FormTemplateFieldDefinition fieldDef,
-            [SwaggerWcfParameter(Description = "The 0-based index of the position to insert the new field", Required = true)]
-            int index = -1
+            [SwaggerWcfParameter(Description = "A description of the fields", Required = true)]
+            [FromBody] FormAddFieldsRequest request
             )
         {
             try
             { 
-                Logger.Info($"InsertFieldAtIndex({id}, index = {index}) called");
-
-                if (index < -1)
-                {
-                    string errorMsg = $"The index {index} cannot be less than -1";
-                    throw new WebFaultException<string>(errorMsg, HttpStatusCode.BadRequest);
-                }
-
-                var response = this.Service.InsertField(id, fieldDef, index);
-
-                Logger.Info($"InsertFieldAtIndex({id}, index = {index}) returned {MagmaConverse.Framework.Serialization.Json.Serialize(response)}");
+                Logger.Info($"InsertFieldAtIndex({id} called");
+                var response = this.Service.InsertFields(id, request);
+                Logger.Info($"InsertFieldAtIndex({id}) returned {MagmaConverse.Framework.Serialization.Json.Serialize(response)}");
                 return response;
-            }
-            catch (Exception exc)
-            {
-                Logger.Error(exc);
-                this.Response.StatusCode = (int) HttpStatusCode.BadRequest;
-                return null;
-            }
-        }
-
-        /// <inheritdoc/>
-        [HttpPut("form/field/namedinsert/{id}", Name = "InsertFieldAtNamed")]
-        //[ValidateAntiForgeryToken]
-        [SwaggerWcfTag("Form")]
-        [SwaggerWcfTag("Field")]
-        [SwaggerWcfResponse(HttpStatusCode.OK, "True if the field was inserted")]
-        [SwaggerWcfResponse(HttpStatusCode.BadRequest, "Bad request", true)]
-        [SwaggerWcfResponse(HttpStatusCode.InternalServerError, "Internal error", true)]
-        public ActionResult<ResponseStatus<bool>> InsertFieldAtNamed(
-            [SwaggerWcfParameter(Description = "The id of a form instance, as returned by the NewForm call", Required = true)]
-            string id,
-            [SwaggerWcfParameter(Description = "A description of the field", Required = true)]
-            [FromBody] FormTemplateFieldDefinition fieldDef,
-            [SwaggerWcfParameter(Description = "The name of the field within the form to find. The new field will be inserted before or after this field.", Required = true)]
-            string targetFieldName,
-            [SwaggerWcfParameter(Description = "Specifies whether the new field should be inserted before or after the target field.", Required = true)]
-            InsertMode insertMode = InsertMode.After
-            )
-        {
-            try
-            { 
-                Logger.Info($"InsertFieldAtNamed({id}, target = {targetFieldName}, mode = {insertMode}) called");
-
-                if (string.IsNullOrEmpty(targetFieldName))
-                {
-                    string errorMsg = "The target field cannot be null or empty";
-                    throw new WebFaultException<string>(errorMsg, HttpStatusCode.BadRequest);
-                }
-
-                var response = this.Service.InsertField(id, fieldDef, targetFieldName, insertMode);
-
-                Logger.Info($"InsertFieldAtNamed({id},target = {targetFieldName}, mode = {insertMode}) returned {MagmaConverse.Framework.Serialization.Json.Serialize(response)}");
-                return new ResponseStatus<bool>(true);
             }
             catch (Exception exc)
             {

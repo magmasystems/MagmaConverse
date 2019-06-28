@@ -172,43 +172,54 @@ namespace MagmaConverse.Data
             if (def?.Definition == null)
                 return null;
 
-            foreach (var fieldDef in def.Definition.Fields)
-            {
-                this.AddField(fieldDef, referenceDataResolver);
-            }
+            var newRequest = new FormAddFieldsRequest { Fields = def.Definition.Fields };
+            this.AddFields(newRequest, referenceDataResolver);
 
             return this;
         }
 
-        public ISBSFormField AddField(FormTemplateFieldDefinition fieldDef, IHasLookup referenceDataResolver = null)
+        public IEnumerable<ISBSFormField> AddFields(FormAddFieldsRequest request, IHasLookup referenceDataResolver = null)
         {
-            return this.InsertField(fieldDef, -1, referenceDataResolver);
+            var newRequest = new FormAddFieldsRequest { Fields = request.Fields, Index = -1, InsertMode = InsertMode.After };
+            return this.InsertFields(newRequest, referenceDataResolver);
         }
 
-        public ISBSFormField InsertField(FormTemplateFieldDefinition fieldDef, int index = -1, IHasLookup referenceDataResolver = null)
+        public IEnumerable<ISBSFormField> InsertFields(FormAddFieldsRequest request, IHasLookup referenceDataResolver = null)
         {
-            if (fieldDef == null)
+            if (request == null)
                 return null;
 
-            ISBSFormField field = SBSFormField.Create(this, fieldDef, referenceDataResolver);
-            if (index == -1)
-                index = this.Fields.Count;
-            this.Fields.Insert(index, field);
-            return field;
-        }
+            var newFields = new List<ISBSFormField>();
 
-        public ISBSFormField InsertField(FormTemplateFieldDefinition fieldDef, string targetFieldName, InsertMode insertMode = InsertMode.After, IHasLookup referenceDataResolver = null)
-        {
-            if (fieldDef == null)
-                return null;
+            foreach (var fieldDef in request.Fields)
+            {
+                ISBSFormField field = SBSFormField.Create(this, fieldDef, referenceDataResolver);
+                newFields.Add(field);
+            }
 
-            int targetIndex = this.FindFieldIndex(targetFieldName);
-            if (targetIndex < 0)
-                return null;
+            int targetIndex;
+            if (!string.IsNullOrEmpty(request.Target))
+            {
+                targetIndex = this.FindFieldIndex(request.Target);
+                if (targetIndex < 0)
+                    return null;
+            }
+            else
+            {
+                targetIndex = request.Index == -1 ? this.Fields.Count : request.Index;
+            }
+            targetIndex += request.InsertMode == InsertMode.Before ? 0 : 1;
 
-            ISBSFormField field = SBSFormField.Create(this, fieldDef, referenceDataResolver);
-            this.Fields.Insert(targetIndex + (insertMode == InsertMode.Before ? 0 : 1), field);
-            return field;
+            if (targetIndex >= this.Fields.Count)
+            {
+                this.Fields.AddRange(newFields);
+            }
+            else
+            {
+                this.Fields.InsertRange(targetIndex, newFields);
+            }
+            
+            return newFields;
         }
 
         public ISBSFormField this[string fieldName] => this.FindField(fieldName);

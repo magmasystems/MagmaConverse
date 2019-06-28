@@ -63,40 +63,27 @@ namespace MagmaConverse.Models
             return form;
         }
 
-        public bool AddField(string idFormInstance, FormTemplateFieldDefinition fieldDef)
+        public bool AddFields(string idFormInstance, FormAddFieldsRequest request)
         {
             SBSForm form = this.GetFormInstance(idFormInstance);
             if (form == null)
                 throw new ApplicationException($"The form with instance id {idFormInstance} does not exist");
 
-            var field = form.AddField(fieldDef, SBSFormReferenceDataModel.Instance);
-            if (field == null)
+            var fields = form.AddFields(request, SBSFormReferenceDataModel.Instance);
+            if (fields == null)
                 return false;
 
             return true;
         }
 
-        public bool InsertField(string idFormInstance, FormTemplateFieldDefinition fieldDef, int index = -1)
+        public bool InsertFields(string idFormInstance, FormAddFieldsRequest request)
         {
             SBSForm form = this.GetFormInstance(idFormInstance);
             if (form == null)
                 throw new ApplicationException($"The form with instance id {idFormInstance} does not exist");
 
-            var field = form.InsertField(fieldDef, index, SBSFormReferenceDataModel.Instance);
-            if (field == null)
-                return false;
-
-            return true;
-        }
-
-        public bool InsertField(string idFormInstance, FormTemplateFieldDefinition fieldDef, string targetFieldName, InsertMode insertMode = InsertMode.After)
-        {
-            SBSForm form = this.GetFormInstance(idFormInstance);
-            if (form == null)
-                throw new ApplicationException($"The form with instance id {idFormInstance} does not exist");
-
-            var field = form.InsertField(fieldDef, targetFieldName, insertMode, SBSFormReferenceDataModel.Instance);
-            if (field == null)
+            var fields = form.InsertFields(request, SBSFormReferenceDataModel.Instance);
+            if (fields == null)
                 return false;
 
             return true;

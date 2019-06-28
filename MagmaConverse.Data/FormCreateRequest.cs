@@ -305,4 +305,42 @@ namespace MagmaConverse.Data
     public class FieldActions : Properties
     {
     }
+
+    [Serializable]
+    [DataContract]
+    [SwaggerWcfDefinition("FormAddFieldsRequest")]
+    public class FormAddFieldsRequest
+    {
+        [DataMember(Name = "target", IsRequired = false)]
+        [SwaggerWcfProperty()]
+        public string Target { get; set; }
+
+        [DataMember(Name = "index", IsRequired = false)]
+        [SwaggerWcfProperty()]
+        public int Index { get; set; } = -999;
+
+        [DataMember(Name = "insertMode", IsRequired = false)]
+        [SwaggerWcfProperty()]
+        public InsertMode InsertMode { get; set; } = InsertMode.Before;
+
+        [DataMember(Name = "fields", IsRequired = true)]
+        [SwaggerWcfProperty()]
+        public List<FormTemplateFieldDefinition> Fields { get; set; }
+
+        // An optional list of properties that control the application globally (not per form)
+        [DataMember(Name = "properties", IsRequired = false)]
+        [SwaggerWcfProperty()]
+        public Properties Properties { get; set; }
+
+        public bool Validate(out List<string> errors)
+        {
+            errors = new List<string>();
+
+            foreach (var field in this.Fields)
+            {
+            }
+
+            return errors.Count == 0;
+        }
+    }
 }

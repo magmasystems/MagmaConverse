@@ -36,9 +36,8 @@ namespace MagmaConverse.Services
         ResponseStatus<bool> ActivateUser(string formId, string activationCode);
 
         ResponseStatus<SBSFormField> GetField(string idInstance, string fieldName);
-        ResponseStatus<bool> AddField(string idInstance, FormTemplateFieldDefinition fieldDef);
-        ResponseStatus<bool> InsertField(string idInstance, FormTemplateFieldDefinition fieldDef, int index = -1);
-        ResponseStatus<bool> InsertField(string idInstance, FormTemplateFieldDefinition fieldDef, string targetFieldName, InsertMode insertMode = InsertMode.After);
+        ResponseStatus<bool> AddFields(string idInstance, FormAddFieldsRequest request);
+        ResponseStatus<bool> InsertFields(string idInstance, FormAddFieldsRequest request);
         ResponseStatus ClearFields(string idInstance);
         ResponseStatus<bool> DeleteField(string idInstance, string fieldName);
 
@@ -63,8 +62,6 @@ namespace MagmaConverse.Services
         #endregion
 
         #region Variables
-        private IFormManagerRestServiceContract RestService { get; }
-
         private SBSFormDefinitionModel      FormDefinitionModel { get; }
         private SBSFormModel                FormModel { get; }
         private SBSFormReferenceDataModel   RefDataModel { get; }
@@ -89,11 +86,6 @@ namespace MagmaConverse.Services
             this.FormDefinitionModel = SBSModelCreator.Instance.Create<SBSFormDefinitionModel>(settings);
             this.FormModel = SBSModelCreator.Instance.Create<SBSFormModel>(settings);
             this.RefDataModel = SBSModelCreator.Instance.Create<SBSFormReferenceDataModel>(settings);
-
-            if (settings == null || settings.NoCreateRestService == false)
-            {
-                this.RestService = new FormManagerRestService(this);
-            }
         }
 
         #endregion
@@ -101,8 +93,6 @@ namespace MagmaConverse.Services
         #region Cleanup
         public override void Dispose()
         {
-            ((FormManagerRestService) RestService)?.Dispose();
-
             foreach (var model in SBSModelCreator.Instance)
             {
                 model.Dispose();
@@ -281,21 +271,15 @@ namespace MagmaConverse.Services
             return new ResponseStatus<SBSFormDefinition>(def);
         }
 
-        public ResponseStatus<bool> AddField(string idInstance, FormTemplateFieldDefinition fieldDef)
+        public ResponseStatus<bool> AddFields(string idInstance, FormAddFieldsRequest request)
         {
-            var rc = this.FormModel.AddField(idInstance, fieldDef);
+            var rc = this.FormModel.AddFields(idInstance, request);
             return new ResponseStatus<bool>(rc);
         }
 
-        public ResponseStatus<bool> InsertField(string idInstance, FormTemplateFieldDefinition fieldDef, int index = -1)
+        public ResponseStatus<bool> InsertFields(string idInstance, FormAddFieldsRequest request)
         {
-            var rc = this.FormModel.InsertField(idInstance, fieldDef, index);
-            return new ResponseStatus<bool>(rc);
-        }
-
-        public ResponseStatus<bool> InsertField(string idInstance, FormTemplateFieldDefinition fieldDef, string targetFieldName, InsertMode insertMode = InsertMode.After)
-        {
-            var rc = this.FormModel.InsertField(idInstance, fieldDef, targetFieldName, insertMode);
+            var rc = this.FormModel.InsertFields(idInstance, request);
             return new ResponseStatus<bool>(rc);
         }
 

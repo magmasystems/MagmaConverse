@@ -151,40 +151,26 @@ namespace MagmaConverse.Controllers
         ActionResult<ResponseStatus<SBSFormField>> GetField(string idInstance, string fieldName);
 
         /// <summary>
-        /// Adds a new field at the end of an instance of a form
+        /// Adds a new fields at the end of an instance of a form
         /// </summary>
         /// <param name="idInstance">The instance of the form (sent in the Json body)</param>
-        /// <param name="fieldDef">The definition of the field</param>
+        /// <param name="request">The definition of the field</param>
         /// <returns>A ResponseStatus with True if the field was added</returns>
         [SwaggerWcfPath(summary: "Adds a new field at the end of an instance of a form")]
         [OperationContract]
-        [WebInvoke(Method = "PUT", UriTemplate = "/form/field/add", RequestFormat = WebMessageFormat.Json, ResponseFormat = WebMessageFormat.Json, BodyStyle = WebMessageBodyStyle.Wrapped)]
-        ActionResult<ResponseStatus<bool>> AddField(string idInstance, FormTemplateFieldDefinition fieldDef);
+        [WebInvoke(Method = "PUT", UriTemplate = "/form/{id}/field/add", RequestFormat = WebMessageFormat.Json, ResponseFormat = WebMessageFormat.Json, BodyStyle = WebMessageBodyStyle.Wrapped)]
+        ActionResult<ResponseStatus<bool>> AddFields(string idInstance, FormAddFieldsRequest request);
 
         /// <summary>
-        /// Inserts a new field at a certain location in an instance of a form
+        /// Inserts a new fields at a certain location in an instance of a form
         /// </summary>
         /// <param name="idInstance">The instance of the form (sent in the Json body)</param>
-        /// <param name="fieldDef">The definition of the field</param>
-        /// <param name="index">The 0-based index of where to insert the field. If index is -1, then the field is added to the end.</param>
+        /// <param name="request">The definition of the field</param>
         /// <returns>A ResponseStatus with True if the field was inserted</returns>
         [SwaggerWcfPath(summary: "Inserts a new field at a certain location in an instance of a form")]
         [OperationContract]
-        [WebInvoke(Method = "PUT", UriTemplate = "/form/field/insert", RequestFormat = WebMessageFormat.Json, ResponseFormat = WebMessageFormat.Json, BodyStyle = WebMessageBodyStyle.Wrapped)]
-        ActionResult<ResponseStatus<bool>> InsertFieldAtIndex(string idInstance, FormTemplateFieldDefinition fieldDef, int index = -1);
-
-        /// <summary>
-        /// Inserts a new field before or after a specific field in an instance of a form
-        /// </summary>
-        /// <param name="idInstance">The instance of the form (sent in the Json body)</param>
-        /// <param name="fieldDef">The definition of the field</param>
-        /// <param name="target">The name of the field to insert the new field before or after</param>
-        /// <param name="mode">0 for Before and 1 for After</param>
-        /// <returns>A ResponseStatus with True if the field was inserted</returns>
-        [SwaggerWcfPath(summary: "Inserts a new field before or after a specific field in an instance of a form")]
-        [OperationContract]
-        [WebInvoke(Method = "PUT", UriTemplate = "/form/field/namedinsert", RequestFormat = WebMessageFormat.Json, ResponseFormat = WebMessageFormat.Json, BodyStyle = WebMessageBodyStyle.Wrapped)]
-        ActionResult<ResponseStatus<bool>> InsertFieldAtNamed(string idInstance, FormTemplateFieldDefinition fieldDef, string target, InsertMode mode = InsertMode.After);
+        [WebInvoke(Method = "PUT", UriTemplate = "/form/{id}/field/insert", RequestFormat = WebMessageFormat.Json, ResponseFormat = WebMessageFormat.Json, BodyStyle = WebMessageBodyStyle.Wrapped)]
+        ActionResult<ResponseStatus<bool>> InsertFields(string idInstance, FormAddFieldsRequest request);
 
         /// <summary>
         /// Deletes all fields in an instance of a form
