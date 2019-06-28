@@ -127,9 +127,9 @@
   "forms": [
     {
       "name": "frmDIYCustomerOnboarding",
-      "title": "ADP Do-it-yourself Payroll Registration for Small Businesses",
+      "title": "Magma Do-it-yourself Payroll Registration for Small Businesses",
       "subtitle": "The perfect payroll solution for businesses with 50 or less employees",
-      "description": "This forms onboards a new customer for ADP's RUN payroll system",
+      "description": "This forms onboards a new customer for Magma's RUN payroll system",
       "fields": [
         /* Business Basics */
         {
@@ -294,7 +294,7 @@
 
         {
           "name": "sectionRegister",
-          "prompt": "Register for the ADP DIY Onboarding Website",
+          "prompt": "Register for the Magma DIY Onboarding Website",
           "type": "section"
         },
         {
@@ -752,7 +752,7 @@
 
         {
           "name": "promptCongrats",
-          "prompt": "Congratulations. You have signed up for ADP Payroll.",
+          "prompt": "Congratulations. You have signed up for Magma Payroll.",
           "type": "edit",
           "disabled": true,
           "validation": {

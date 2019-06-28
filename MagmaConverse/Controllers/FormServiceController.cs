@@ -124,7 +124,7 @@ namespace MagmaConverse.Controllers
                 this.Response.StatusCode = (int) HttpStatusCode.BadRequest;
                 return null;
             }
-}
+        }
 
         /// <inheritdoc/>
         [HttpGet("form/definition/name/{name}", Name = "FindFormDefinitionByName")]
@@ -380,8 +380,12 @@ namespace MagmaConverse.Controllers
             { 
                 Logger.Info($"GetField({idInstance}, {fieldName}) called");
                 var response = this.Service.GetField(idInstance, fieldName);
-
                 Logger.Info($"GetField({idInstance}, {fieldName}) returned {MagmaConverse.Framework.Serialization.Json.Serialize(response)}");
+
+                if (response.Value == null)
+                {
+                    this.Response.StatusCode = (int) HttpStatusCode.NotFound;
+                }
                 return response;
             }
             catch (Exception exc)
