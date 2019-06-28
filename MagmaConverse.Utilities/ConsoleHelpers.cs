@@ -178,6 +178,11 @@ namespace MagmaConverse.Utilities
 
         public static IntPtr SpawnConsole()
         {
+
+            #if NETCOREAPP
+            CreatedNewConsole = true;
+            return (IntPtr) 0x666;
+            #else
             // Get console window
             CreatedNewConsole = false;
 
@@ -194,14 +199,18 @@ namespace MagmaConverse.Utilities
             ShowWindow(handle, SW_SHOW);
 
             return handle;
+            #endif
         }
 
         public static void KillConsole(IntPtr handle)
         {
             if (CreatedNewConsole)
             {
+                #if NETCOREAPP
+                #else
                 ShowWindow(handle, SW_HIDE);
                 FreeConsole();
+                #endif
             }
         }
         #endregion
