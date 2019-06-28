@@ -4,8 +4,10 @@ namespace MagmaConverse.Persistence.Interfaces
 {
 	public interface IDocumentDatabasePersistenceDriver : IPersistenceDriver
 	{
+        DocumentDatabaseAdapterConfiguration AdapterConfiguration { get; }
+
         // Health
-	    bool IsDatabaseAlive { get; }
+        bool IsDatabaseAlive { get; }
 
         // Operations on databases
         IDocumentDatabase CreateDatabase(string databaseName, bool deleteExistingDB = false);

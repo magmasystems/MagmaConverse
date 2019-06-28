@@ -12,7 +12,14 @@ namespace MagmaConverse.Persistence
 
 	public class DocumentDatabaseAdapterConfiguration : ConfigurationSection
 	{
-		[ConfigurationProperty("behavior", IsDefaultCollection = false, IsRequired = false)]
+        [ConfigurationProperty("driver", IsRequired = true)]
+        public string Driver
+        {
+            get => this["driver"] as string;
+            set => this["driver"] = value;
+        }
+
+        [ConfigurationProperty("behavior", IsDefaultCollection = false, IsRequired = false)]
 		public Behavior Behavior => this["behavior"] as Behavior;
 
 	    [ConfigurationProperty("typeBehaviors", IsDefaultCollection = false, IsRequired = false)]

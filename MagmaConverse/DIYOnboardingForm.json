@@ -730,7 +730,7 @@
           },
           "submissionFunctions": [
             {
-              "workflow": "mockrest://${config:server.OnboardingServer}/DIYOnboardingService/form/${field:frmDIYCustomerOnboarding.Id}/employee/add",
+              "workflow": "mockrest://${config:server.MagmaConverseServer}/DIYOnboardingService/form/${field:frmDIYCustomerOnboarding.Id}/employee/add",
               "properties": {
                 "method": "post",
                 "body": "${field:employeeDetailsGroup}",

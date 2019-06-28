@@ -1,8 +1,9 @@
 ﻿using System;
 using System.IO;
 using System.Reflection;
+using System.Runtime.Loader;
 
-namespace MagmaConverse.Configuration
+namespace MagmaConverse.Utilities
 {
     public static class TypeHelpers
     {
@@ -15,7 +16,7 @@ namespace MagmaConverse.Configuration
             if (type != null)
                 return type;
 
-            // Look at the <DIYOnboarding> element, and see if we have a list of directories to probe
+            // Look at the <$Root> element, and see if we have a list of directories to probe
             string[] probingDirectories = theProbingDirectories.Split(';', ',');
             if (probingDirectories.Length == 0)
                 return null;
@@ -52,6 +53,16 @@ namespace MagmaConverse.Configuration
 
             // Sorry ....
             return null;
+        }
+
+        public static Type LoadType2(string typeName)
+        {
+            var assemblyName = typeName.Split(new char[] { ',', ' ' }, StringSplitOptions.RemoveEmptyEntries)[1];
+            var assembly = AssemblyLoadContext.Default.LoadFromAssemblyPath($"{AppDomain.CurrentDomain.BaseDirectory}{assemblyName}.dll");
+            if (assembly == null)
+                return null;
+            var type = Type.GetType(typeName);
+            return type;
         }
     }
 }

@@ -678,7 +678,7 @@ namespace MagmaConverse.Controllers
             {
                 IncomingWebRequestContext request = WebOperationContext.Current.IncomingRequest;
                 WebHeaderCollection headers = request.Headers;
-                token = headers["DIYOnboarding-AuthToken"];
+                token = headers["MagmaConverse-AuthToken"];
             }
 
             return token;

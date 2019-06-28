@@ -31,19 +31,14 @@ namespace MagmaConverse.Persistence.MongoDB
         protected TimeSpan ConnectionTimeOutInterval { get; }
         protected string ConnectionString { get; private set; }
         protected string DriverName { get; }
+        public DocumentDatabaseAdapterConfiguration AdapterConfiguration { get; }
         #endregion
 
         #region Constructors
-        public MongoDBPersistenceDriver()
+        public MongoDBPersistenceDriver(DocumentDatabaseAdapterConfiguration adapterConfig)
         {
             this.DriverName = "mongodb";
-            this.ConnectionTimeOutInterval = new TimeSpan(0, 0, 10);
-
-            this.Initialize();
-        }
-        public MongoDBPersistenceDriver(string DriverName)
-        {
-            this.DriverName = DriverName;
+            this.AdapterConfiguration = adapterConfig;
             this.ConnectionTimeOutInterval = new TimeSpan(0, 0, 10);
 
             this.Initialize();
@@ -101,7 +96,8 @@ namespace MagmaConverse.Persistence.MongoDB
             this.Client = new MongoClient(connectionString);
 
             // See if Mongo is running
-            if (!this.TestIfDatabaseAlive("DIYOnboarding"))
+            var defaultDatabaseName = this.AdapterConfiguration.Behavior.DatabaseName;
+            if (!this.TestIfDatabaseAlive(defaultDatabaseName))
             {
                 string errorMsg = $"MongoDB - It is not alive for connection {this.ConnectionString}";
                 Logger.Error(errorMsg);

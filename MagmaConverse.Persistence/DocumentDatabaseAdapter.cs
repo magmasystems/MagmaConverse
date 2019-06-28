@@ -114,7 +114,7 @@ namespace MagmaConverse.Persistence
 
 			if (this.DatabaseDriver == null)
 			{
-				this.DatabaseDriver = PersistenceDriverFactory.Create(this.DatabaseVendorName);
+				this.DatabaseDriver = PersistenceDriverFactory.Create(this.DatabaseVendorName, this.AdapterConfig);
 				//ApplicationPersistenceSettings.MongoDriver = this.DatabaseDriver;
 				this.DatabaseDriver.ConnectionStateChanged += state =>
 				{

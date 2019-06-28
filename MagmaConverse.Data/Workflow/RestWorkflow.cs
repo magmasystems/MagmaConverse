@@ -23,7 +23,7 @@ namespace MagmaConverse.Data.Workflow
         public override object Execute()
         {
             /*
-                "workflow": "rest://localhost:8089/DIYOnboardingService/form/${field:RepeaterGroupForm.Id}/employee/add",
+                "workflow": "rest://localhost:8089/FormManagerService/form/${field:RepeaterGroupForm.Id}/employee/add",
                 "properties": {
                     "method": "post",
                     "body": "${form:RepeaterGroupForm}",

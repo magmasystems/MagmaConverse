@@ -1,6 +1,7 @@
+using System;
 using System.Collections.Generic;
-using System.Reflection;
 using MagmaConverse.Persistence.Interfaces;
+using MagmaConverse.Utilities;
 
 namespace MagmaConverse.Persistence
 {
@@ -10,7 +11,7 @@ namespace MagmaConverse.Persistence
         private static readonly object m_lock = new object();
         private static Dictionary<string, IDocumentDatabasePersistenceDriver> TheDrivers { get; } = new Dictionary<string, IDocumentDatabasePersistenceDriver>();
 
-		public static IDocumentDatabasePersistenceDriver Create(string driverName)
+		public static IDocumentDatabasePersistenceDriver Create(string driverName, DocumentDatabaseAdapterConfiguration adapterConfig)
 		{
 			if (driverName == null)
 				driverName = "default";
@@ -19,28 +20,30 @@ namespace MagmaConverse.Persistence
 			{
 				case "documentdb":
 				case "docdb"     :
-					return LoadDriver("DocumentDB");
+					return LoadDriver("DocumentDB", adapterConfig);
 
 				case "mongo":
 				case "mongodb":
-					return LoadDriver("MongoDB");
+					return LoadDriver("MongoDB", adapterConfig);
 
 				default:
 					return null;
 			}
 		}
 
-		private static IDocumentDatabasePersistenceDriver LoadDriver(string driverName)
+		private static IDocumentDatabasePersistenceDriver LoadDriver(string driverName, DocumentDatabaseAdapterConfiguration adapterConfig)
 		{
 		    lock (m_lock)
 		    {
 		        if (TheDrivers.TryGetValue(driverName, out IDocumentDatabasePersistenceDriver driver))
 		            return driver;
 
-		        Assembly assembly = Assembly.Load("MagmaConverse.Persistence." + driverName);
-		        var obj = assembly.CreateInstance("MagmaConverse.Persistence." + driverName + "." + driverName + "PersistenceDriver", true);
-
-		        driver = obj as IDocumentDatabasePersistenceDriver;
+                var driverType = TypeHelpers.LoadType2(adapterConfig.Driver);
+		        driver = Activator.CreateInstance(driverType, adapterConfig) as IDocumentDatabasePersistenceDriver;
+                if (driver == null)
+                {
+                    return null;
+                }
 
 		        TheDrivers.Add(driverName, driver);
 		        return driver;
