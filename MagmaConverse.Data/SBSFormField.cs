@@ -5,6 +5,7 @@ using MagmaConverse.Data.Fields;
 using Magmasystems.Framework;
 using MagmaConverse.Interfaces;
 using Newtonsoft.Json;
+using MongoDB.Bson.Serialization.Attributes;
 
 namespace MagmaConverse.Data
 {
@@ -148,6 +149,7 @@ namespace MagmaConverse.Data
         [DataMember(Name = "formid")]
         public string FormId { get; set; }
 
+        [BsonIgnore]
         [JsonIgnore]
         [IgnoreDataMember]
         public ISBSForm Form { get; set; }

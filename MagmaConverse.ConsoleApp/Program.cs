@@ -233,6 +233,7 @@ namespace MagmaConverse.ConsoleApp
 				formInstance.Cancelled += form => { eventStop.Set(); };
 				service.RunFormEnded += form =>
 				{
+                    service.SaveForm(idFormInstance);
 					if (form.Id == idFormInstance)
 						eventStop.Set();
 				};

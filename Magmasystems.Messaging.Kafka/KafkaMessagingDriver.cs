@@ -9,7 +9,7 @@ using Confluent.Kafka;
 using log4net;
 using Newtonsoft.Json;
 
-namespace MagmaConverse.Messaging.Kafka
+namespace Magmasystems.Messaging.Kafka
 {
     public interface IKafkaMessagingDriver : IDisposable
     {

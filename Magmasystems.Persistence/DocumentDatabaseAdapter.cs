@@ -412,7 +412,7 @@ namespace Magmasystems.Persistence
 	        if (!this.ConnectionGuard())
 	            return false;
 
-            var doc2 = this.DatabaseDriver.GetById(this.GetDefaultCollection(), doc.id);
+            var doc2 = this.DatabaseDriver.GetById(this.GetDefaultCollection(), doc._id);
 	        return doc2 != null && this.DatabaseDriver.Delete(doc2);
 	    }
 

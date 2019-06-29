@@ -17,7 +17,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Documentation", "Documentat
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MagmaConverse.Interfaces", "MagmaConverse.Interfaces\MagmaConverse.Interfaces.csproj", "{9E59C4D5-003B-4024-B3D8-6DF57DB4E71E}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MagmaConverse.Messaging.Kafka", "MagmaConverse.Messaging.Kafka\MagmaConverse.Messaging.Kafka.csproj", "{C51E80D9-8D04-4869-BBAB-0811C7AFF34E}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Magmasystems.Messaging.Kafka", "Magmasystems.Messaging.Kafka\Magmasystems.Messaging.Kafka.csproj", "{C51E80D9-8D04-4869-BBAB-0811C7AFF34E}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MagmaConverse.Data", "MagmaConverse.Data\MagmaConverse.Data.csproj", "{2F111C1D-0512-4D9A-9F79-7CE301DC2CCD}"
 EndProject
@@ -31,7 +31,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MagmaConverse.Mocks", "Magm
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MagmaConverse.Services", "MagmaConverse.Services\MagmaConverse.Services.csproj", "{795B4E1A-82D3-4042-8FAF-A7F0E960642B}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MagmaConverse.Messaging", "MagmaConverse.Messaging\MagmaConverse.Messaging.csproj", "{B713CF49-3DD3-403B-9B59-3B869EA1A0D8}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Magmasystems.Messaging", "Magmasystems.Messaging\Magmasystems.Messaging.csproj", "{B713CF49-3DD3-403B-9B59-3B869EA1A0D8}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MagmaConverse.Controllers", "MagmaConverse.Controllers\MagmaConverse.Controllers.csproj", "{F490E4B4-F8D6-4C97-9894-0A4CFB2E0CBE}"
 EndProject

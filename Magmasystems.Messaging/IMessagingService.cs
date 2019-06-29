@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace MagmaConverse.Messaging
+namespace Magmasystems.Messaging
 {
     public interface IMessagingService : IDisposable
     {

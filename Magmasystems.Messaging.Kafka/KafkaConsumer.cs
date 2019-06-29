@@ -9,7 +9,7 @@ using log4net;
 
 // https://github.com/confluentinc/confluent-kafka-dotnet/blob/v1.0.1.1/examples/Consumer/Program.cs
 
-namespace MagmaConverse.Messaging.Kafka
+namespace Magmasystems.Messaging.Kafka
 {
     public interface IKafkaConsumer<T> : IDisposable
     {

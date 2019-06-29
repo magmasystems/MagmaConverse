@@ -290,14 +290,18 @@ namespace MagmaConverse.Data
         public List<object> Array { get; set; }
 
         [JsonIgnore]
-        public string Id { get => this.id; set => this.id = value; }
+        public string Id
+        {
+            get => this._id;
+            set => this._id = value;
+        }
 
         [JsonIgnore]
-        public string id { get; set; }
+        public string _id { get; set; }
 
         public FormCreationReferenceData()
         {
-            this.id = string.IsNullOrEmpty(this.Name) ? IdGenerators.RefDataId() : IdGenerators.RefDataId($"ReferenceData.{this.Name}.");
+            this._id = string.IsNullOrEmpty(this.Name) ? IdGenerators.RefDataId() : IdGenerators.RefDataId($"ReferenceData.{this.Name}.");
         }
     }
 

@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
-using MagmaConverse.Messaging.Kafka;
+using Magmasystems.Messaging.Kafka;
 
-namespace MagmaConverse.Messaging
+namespace Magmasystems.Messaging
 {
     public class KafkaMessagingService : IMessagingService
     {

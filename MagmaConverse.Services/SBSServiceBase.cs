@@ -1,6 +1,6 @@
 ﻿using System;
 using MagmaConverse.Interfaces;
-using MagmaConverse.Messaging;
+using Magmasystems.Messaging;
 using MagmaConverse.Models;
 using log4net;
 

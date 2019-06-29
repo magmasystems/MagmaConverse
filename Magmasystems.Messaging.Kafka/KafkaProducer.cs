@@ -5,7 +5,7 @@ using System.Threading.Tasks;
 using Confluent.Kafka;
 using log4net;
 
-namespace MagmaConverse.Messaging.Kafka
+namespace Magmasystems.Messaging.Kafka
 {
     public interface IKafkaProducer<T> : IDisposable
     {

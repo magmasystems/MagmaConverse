@@ -16,7 +16,11 @@ namespace MagmaConverse.Data
 
         [DataMember]
         [BsonId]
-        public string id { get => this.Id; set => this.Id = value; }
+        public string _id
+        {
+            get => this.Id;
+            set => this.Id = value;
+        }
 
         /// <summary>
         /// The actual definition of the form

@@ -1,6 +1,6 @@
 ﻿using log4net;
 
-namespace MagmaConverse.Messaging
+namespace Magmasystems.Messaging
 {
     public static class MessagingServiceFactory
     {

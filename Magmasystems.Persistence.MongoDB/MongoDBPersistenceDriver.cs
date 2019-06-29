@@ -12,7 +12,6 @@ using System.Linq.Expressions;
 using System.Threading;
 using System.Threading.Tasks;
 using Magmasystems.Framework;
-using Magmasystems.Framework;
 using System.Text;
 using Newtonsoft.Json.Linq;
 // ReSharper disable ArgumentsStyleNamedExpression
@@ -404,7 +403,7 @@ namespace Magmasystems.Persistence.MongoDB
                 return null;
 
             BsonDocument bsonData = data.ToBsonDocument();
-            Logger.Info($"MongoDB - Saving document {data.id} into collection {collection.Name}");
+            Logger.Info($"MongoDB - Saving document {data._id} into collection {collection.Name}");
             nativeCollection.InsertOneAsync(bsonData).Wait();
 
             return this.WrapNativeDocument(collection, bsonData);
@@ -422,7 +421,7 @@ namespace Magmasystems.Persistence.MongoDB
             if (!(document.DocumentCollection.NativeCollection is IMongoCollection<BsonDocument> nativeCollection))
                 return false;
 
-            Logger.Info($"MongoDB - Updating document {data.id}");
+            Logger.Info($"MongoDB - Updating document {data._id}");
 
             // Serialize data into Bson
             BsonDocument bsonReplacement = data.ToBsonDocument();

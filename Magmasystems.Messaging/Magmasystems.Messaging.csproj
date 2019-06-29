@@ -14,6 +14,6 @@
     <PackageReference Include="log4net" Version="2.0.8" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\MagmaConverse.Messaging.Kafka\MagmaConverse.Messaging.Kafka.csproj" />
+    <ProjectReference Include="..\Magmasystems.Messaging.Kafka\Magmasystems.Messaging.Kafka.csproj" />
   </ItemGroup>
 </Project>

@@ -2,6 +2,6 @@
 {
 	public interface IPersistableDocumentObject
 	{
-		string id { get; set; }
+		string _id { get; set; }
 	}
 }

@@ -9,6 +9,7 @@ using MagmaConverse.Interfaces;
 using Magmasystems.Persistence.Interfaces;
 using log4net;
 using MongoDB.Bson.Serialization.Attributes;
+using Newtonsoft.Json;
 
 namespace MagmaConverse.Data
 {
@@ -99,11 +100,18 @@ namespace MagmaConverse.Data
         private readonly object m_fieldlistLock = new object();
 
         /// <inheritdoc />
-        [DataMember]
+        [IgnoreDataMember]
+        [BsonIgnore]
+        [JsonIgnore]
         public string Id { get; private set; }
 
+        [DataMember]
         [BsonId]
-        public string id { get => this.Id; set => this.Id = value; }
+        public string _id
+        {
+            get => this.Id;
+            set => this.Id = value;
+        }
 
         /// <inheritdoc />
         [DataMember]
