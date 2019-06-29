@@ -3,7 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
-using MagmaConverse.Framework;
+using Magmasystems.Framework;
 using MagmaConverse.Interfaces;
 using Jint;
 using System.Text;

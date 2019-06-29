@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.Runtime.Serialization;
-using MagmaConverse.Framework;
+using Magmasystems.Framework;
 using MagmaConverse.Interfaces;
 using Newtonsoft.Json;
 

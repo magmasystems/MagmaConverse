@@ -12,6 +12,7 @@
   </PropertyGroup>
   <ItemGroup>
     <ProjectReference Include="..\MagmaConverse.Data\MagmaConverse.Data.csproj" />
-    <ProjectReference Include="..\MagmaConverse.Framework\MagmaConverse.Framework.csproj" />
+    <ProjectReference Include="..\Magmasystems.Persistence\Magmasystems.Persistence.csproj" />
+    <ProjectReference Include="..\Magmasystems.Framework\Magmasystems.Framework.csproj" />
   </ItemGroup>
 </Project>

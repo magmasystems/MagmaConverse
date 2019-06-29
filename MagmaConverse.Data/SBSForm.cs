@@ -4,9 +4,9 @@ using System.Linq;
 using System.Runtime.Serialization;
 using MagmaConverse.Data.Fields;
 using MagmaConverse.Data.Workflow;
-using MagmaConverse.Framework.Core;
+using Magmasystems.Framework.Core;
 using MagmaConverse.Interfaces;
-using MagmaConverse.Persistence.Interfaces;
+using Magmasystems.Persistence.Interfaces;
 using log4net;
 using MongoDB.Bson.Serialization.Attributes;
 

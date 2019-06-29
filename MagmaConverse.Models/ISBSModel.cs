@@ -1,5 +1,5 @@
 ﻿using System;
-using MagmaConverse.Framework;
+using Magmasystems.Framework;
 
 namespace MagmaConverse.Models
 {

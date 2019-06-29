@@ -3,10 +3,10 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Linq;
 using System.Threading.Tasks;
-using MagmaConverse.Framework;
-using MagmaConverse.Framework.Core;
-using MagmaConverse.Persistence;
-using MagmaConverse.Persistence.Interfaces;
+using Magmasystems.Framework;
+using Magmasystems.Framework.Core;
+using Magmasystems.Persistence;
+using Magmasystems.Persistence.Interfaces;
 using MongoDB.Bson.Serialization.Attributes;
 
 namespace MagmaConverse.Models

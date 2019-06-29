@@ -2,8 +2,7 @@
 using System.Collections.Generic;
 using MagmaConverse.Data;
 using MagmaConverse.Data.Fields;
-using MagmaConverse.Framework;
-using MagmaConverse.Utilities;
+using Magmasystems.Framework;
 
 namespace MagmaConverse.Views.Console
 {

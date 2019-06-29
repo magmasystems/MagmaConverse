@@ -1,9 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Runtime.Serialization;
-using MagmaConverse.Framework.Core;
-using MagmaConverse.Persistence.Interfaces;
-using MagmaConverse.Framework;
+using Magmasystems.Framework.Core;
+using Magmasystems.Persistence.Interfaces;
+using Magmasystems.Framework;
 using Newtonsoft.Json;
 using SwaggerWcf.Attributes;
 

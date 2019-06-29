@@ -1,7 +1,7 @@
 ﻿using System;
 using MagmaConverse.Data;
 using MagmaConverse.Data.Fields;
-using MagmaConverse.Persistence.Interfaces;
+using Magmasystems.Persistence.Interfaces;
 using MongoDB.Bson.Serialization;
 
 namespace MagmaConverse.Models.MongoSerializationInitializers

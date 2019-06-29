@@ -1,4 +1,4 @@
-﻿using MagmaConverse.Framework;
+﻿using Magmasystems.Framework;
 
 namespace MagmaConverse.Data
 {

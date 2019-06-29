@@ -3,8 +3,8 @@ using Microsoft.AspNetCore.Mvc;
 using SwaggerWcf.Attributes;
 
 using MagmaConverse.Data;
-using MagmaConverse.Framework;
-using MagmaConverse.Framework.Core;
+using Magmasystems.Framework;
+using Magmasystems.Framework.Core;
 using MagmaConverse.Services;
 using System.ServiceModel;
 using System.ServiceModel.Web;

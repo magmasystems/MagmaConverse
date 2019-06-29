@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
-using MagmaConverse.Framework;
+using Magmasystems.Framework;
 using MagmaConverse.Interfaces;
 using log4net;
 

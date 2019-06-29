@@ -1,6 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
-using MagmaConverse.Utilities;
+using Magmasystems.Framework;
 using Newtonsoft.Json.Linq;
 
 namespace MagmaConverse.Data

@@ -1,7 +1,7 @@
 ﻿using System;
 using MagmaConverse.Data;
 using MagmaConverse.Data.Fields;
-using MagmaConverse.Framework;
+using Magmasystems.Framework;
 
 namespace MagmaConverse.Views.Console
 {

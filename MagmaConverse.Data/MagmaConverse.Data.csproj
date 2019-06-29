@@ -19,10 +19,9 @@
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\SwaggerWcf\SwaggerWcf.csproj" />
-    <ProjectReference Include="..\MagmaConverse.Framework\MagmaConverse.Framework.csproj" />
     <ProjectReference Include="..\MagmaConverse.Interfaces\MagmaConverse.Interfaces.csproj" />
-    <ProjectReference Include="..\MagmaConverse.Utilities\MagmaConverse.Utilities.csproj" />
-    <ProjectReference Include="..\MagmaConverse.Persistence\MagmaConverse.Persistence.csproj" />
     <ProjectReference Include="..\MagmaConverse.Mocks\MagmaConverse.Mocks.csproj" />
+    <ProjectReference Include="..\Magmasystems.Persistence\Magmasystems.Persistence.csproj" />
+    <ProjectReference Include="..\Magmasystems.Framework\Magmasystems.Framework.csproj" />
   </ItemGroup>
 </Project>

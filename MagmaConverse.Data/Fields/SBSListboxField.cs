@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Runtime.Serialization;
-using MagmaConverse.Framework;
+using Magmasystems.Framework;
 using MagmaConverse.Interfaces;
 
 namespace MagmaConverse.Data.Fields

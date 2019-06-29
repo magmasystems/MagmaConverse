@@ -5,10 +5,10 @@ using Microsoft.AspNetCore.Mvc;
 using SwaggerWcf.Attributes;
 
 using MagmaConverse.Data;
-using MagmaConverse.Framework;
-using MagmaConverse.Framework.Core;
+using Magmasystems.Framework;
+using Magmasystems.Framework.Core;
 using MagmaConverse.Services;
-using Json = MagmaConverse.Framework.Serialization.Json;
+using Json = Magmasystems.Framework.Serialization.Json;
 using System.ServiceModel.Web;
 
 namespace MagmaConverse.Controllers
@@ -42,7 +42,7 @@ namespace MagmaConverse.Controllers
             {
                 Logger.Info($"CreateForm({request}) called");
                 var response = this.Service.CreateForm(request, true);
-                Logger.Info($"CreateForm({request}) returned {MagmaConverse.Framework.Serialization.Json.Serialize(response)}");
+                Logger.Info($"CreateForm({request}) returned {Magmasystems.Framework.Serialization.Json.Serialize(response)}");
 
                 this.Response.StatusCode = (int) HttpStatusCode.Created;
                 return response;
@@ -66,7 +66,7 @@ namespace MagmaConverse.Controllers
             Logger.Info("ClearFormDefinitions() called");
             ResponseStatus response = this.Service.ClearFormDefinitions();
 
-            Logger.Info($"ClearFormDefinitions() returned {MagmaConverse.Framework.Serialization.Json.Serialize(response)}");
+            Logger.Info($"ClearFormDefinitions() returned {Magmasystems.Framework.Serialization.Json.Serialize(response)}");
             return response;
         }
 
@@ -86,7 +86,7 @@ namespace MagmaConverse.Controllers
             {
                 Logger.Info($"LoadFormDefinitionFromFile({filename}) called");
                 var response = this.Service.LoadFormDefinitionFromFile(filename);
-                Logger.Info($"LoadFormDefinitionFromFile({filename}) returned {MagmaConverse.Framework.Serialization.Json.Serialize(response).Substring(0, 32)}");
+                Logger.Info($"LoadFormDefinitionFromFile({filename}) returned {Magmasystems.Framework.Serialization.Json.Serialize(response).Substring(0, 32)}");
 
                 this.Response.StatusCode = (int) (response.StatusCode == ResponseStatusCodes.Error ? HttpStatusCode.NotFound : HttpStatusCode.OK);
                 return response;
@@ -115,7 +115,7 @@ namespace MagmaConverse.Controllers
                 Logger.Info($"FindFormDefinitionById({id}) called");
                 ResponseStatus<SBSFormDefinition> response = this.Service.FindFormDefinitionById(id);
 
-                Logger.Info($"FindFormDefinitionById({id}) returned {MagmaConverse.Framework.Serialization.Json.Serialize(response)}");
+                Logger.Info($"FindFormDefinitionById({id}) returned {Magmasystems.Framework.Serialization.Json.Serialize(response)}");
                 return response;
             }
             catch (Exception exc)
@@ -142,7 +142,7 @@ namespace MagmaConverse.Controllers
                 Logger.Info($"FindFormDefinitionByName({name}) called");
                 ResponseStatus<SBSFormDefinition> response = this.Service.FindFormDefinitionByName(name);
 
-                Logger.Info($"FindFormDefinitionByName({name}) returned {MagmaConverse.Framework.Serialization.Json.Serialize(response)}");
+                Logger.Info($"FindFormDefinitionByName({name}) returned {Magmasystems.Framework.Serialization.Json.Serialize(response)}");
                 return response;
             }
             catch (Exception exc)
@@ -164,7 +164,7 @@ namespace MagmaConverse.Controllers
                 Logger.Info("GetAllFormDefinitions() called");
                 ResponseStatus<List<SBSFormDefinition>> response = this.Service.GetAllFormDefinitions();
 
-                Logger.Info($"GetAllFormDefinitions() returned {MagmaConverse.Framework.Serialization.Json.Serialize(response)}");
+                Logger.Info($"GetAllFormDefinitions() returned {Magmasystems.Framework.Serialization.Json.Serialize(response)}");
                 return response;
             }
             catch (Exception exc)
@@ -192,7 +192,7 @@ namespace MagmaConverse.Controllers
                 Logger.Info($"DeleteFormDefinition({id}) called");
                 ResponseStatus<bool> response = this.Service.DeleteFormDefinition(id);
 
-                Logger.Info($"DeleteFormDefinition({id}) returned {MagmaConverse.Framework.Serialization.Json.Serialize(response)}");
+                Logger.Info($"DeleteFormDefinition({id}) returned {Magmasystems.Framework.Serialization.Json.Serialize(response)}");
                 return response;
             }
             catch (Exception exc)
@@ -220,7 +220,7 @@ namespace MagmaConverse.Controllers
                 Logger.Info($"DeleteFormDefinitions({ids} called");
                 ResponseStatus<bool> response = this.Service.DeleteFormDefinitions(ids.Split(new[] { ',' }, StringSplitOptions.RemoveEmptyEntries));
 
-                Logger.Info($"DeleteFormDefinitions({ids}) returned {MagmaConverse.Framework.Serialization.Json.Serialize(response)}");
+                Logger.Info($"DeleteFormDefinitions({ids}) returned {Magmasystems.Framework.Serialization.Json.Serialize(response)}");
                 return response;
             }
             catch (Exception exc)
@@ -251,7 +251,7 @@ namespace MagmaConverse.Controllers
                 Logger.Info($"ChangeForm({id}) called");
                 ResponseStatus<bool> response = this.Service.ChangeForm(id, changes);
 
-                Logger.Info($"ChangeForm({id}) returned {MagmaConverse.Framework.Serialization.Json.Serialize(response)}");
+                Logger.Info($"ChangeForm({id}) returned {Magmasystems.Framework.Serialization.Json.Serialize(response)}");
                 return response;
             }
             catch (Exception exc)
@@ -279,7 +279,7 @@ namespace MagmaConverse.Controllers
                 Logger.Info($"NewForm({id}) called");
                 var response = this.Service.NewForm(id);
 
-                Logger.Info($"NewForm({id}) returned {MagmaConverse.Framework.Serialization.Json.Serialize(response)}");
+                Logger.Info($"NewForm({id}) returned {Magmasystems.Framework.Serialization.Json.Serialize(response)}");
                 return response;
             }
             catch (Exception exc)
@@ -311,7 +311,7 @@ namespace MagmaConverse.Controllers
                 Logger.Info($"RunForm({id}) called");
                 var response = this.Service.RunForm(id, driver);
 
-                Logger.Info($"RunForm({id}) returned {MagmaConverse.Framework.Serialization.Json.Serialize(response)}");
+                Logger.Info($"RunForm({id}) returned {Magmasystems.Framework.Serialization.Json.Serialize(response)}");
                 return response;
             }
             catch (Exception exc)
@@ -380,7 +380,7 @@ namespace MagmaConverse.Controllers
             { 
                 Logger.Info($"GetField({idInstance}, {fieldName}) called");
                 var response = this.Service.GetField(idInstance, fieldName);
-                Logger.Info($"GetField({idInstance}, {fieldName}) returned {MagmaConverse.Framework.Serialization.Json.Serialize(response)}");
+                Logger.Info($"GetField({idInstance}, {fieldName}) returned {Magmasystems.Framework.Serialization.Json.Serialize(response)}");
 
                 if (response.Value == null)
                 {
@@ -416,7 +416,7 @@ namespace MagmaConverse.Controllers
                 Logger.Info($"AddField({id}) called");
                 var response = this.Service.AddFields(id, request);
 
-                Logger.Info($"AddField({id}) returned {MagmaConverse.Framework.Serialization.Json.Serialize(response)}");
+                Logger.Info($"AddField({id}) returned {Magmasystems.Framework.Serialization.Json.Serialize(response)}");
                 return response;
             }
             catch (Exception exc)
@@ -446,7 +446,7 @@ namespace MagmaConverse.Controllers
             { 
                 Logger.Info($"InsertFieldAtIndex({id} called");
                 var response = this.Service.InsertFields(id, request);
-                Logger.Info($"InsertFieldAtIndex({id}) returned {MagmaConverse.Framework.Serialization.Json.Serialize(response)}");
+                Logger.Info($"InsertFieldAtIndex({id}) returned {Magmasystems.Framework.Serialization.Json.Serialize(response)}");
                 return response;
             }
             catch (Exception exc)
@@ -475,7 +475,7 @@ namespace MagmaConverse.Controllers
                 Logger.Info($"ClearFields({idInstance})");
                 var response = this.Service.ClearFields(idInstance);
 
-                Logger.Info($"ClearFields({idInstance}) returned {MagmaConverse.Framework.Serialization.Json.Serialize(response)}");
+                Logger.Info($"ClearFields({idInstance}) returned {Magmasystems.Framework.Serialization.Json.Serialize(response)}");
                 return response;
             }
             catch (Exception exc)
@@ -506,7 +506,7 @@ namespace MagmaConverse.Controllers
                 Logger.Info($"DeleteField({idInstance}, {fieldName}) called");
                 var response = this.Service.DeleteField(idInstance, fieldName);
 
-                Logger.Info($"DeleteField({idInstance}, {fieldName}) returned {MagmaConverse.Framework.Serialization.Json.Serialize(response)}");
+                Logger.Info($"DeleteField({idInstance}, {fieldName}) returned {Magmasystems.Framework.Serialization.Json.Serialize(response)}");
                 return response;
             }
             catch (Exception exc)
@@ -534,7 +534,7 @@ namespace MagmaConverse.Controllers
                 Logger.Info($"SaveForm({idInstance}) called");
                 var response = this.Service.SaveForm(idInstance);
 
-                Logger.Info($"SaveForm({idInstance}) returned {MagmaConverse.Framework.Serialization.Json.Serialize(response)}");
+                Logger.Info($"SaveForm({idInstance}) returned {Magmasystems.Framework.Serialization.Json.Serialize(response)}");
                 return response;
             }
             catch (Exception exc)
@@ -562,7 +562,7 @@ namespace MagmaConverse.Controllers
                 Logger.Info($"GetForm({idInstance}) called");
                 var response = this.Service.GetForm(idInstance);
 
-                Logger.Info($"GetForm({idInstance}) returned {MagmaConverse.Framework.Serialization.Json.Serialize(response)}");
+                Logger.Info($"GetForm({idInstance}) returned {Magmasystems.Framework.Serialization.Json.Serialize(response)}");
                 return response;
             }
             catch (Exception exc)
@@ -590,7 +590,7 @@ namespace MagmaConverse.Controllers
                 Logger.Info($"GetFieldValues({idInstance}) called");
                 var response = this.Service.GetFieldValues(idInstance);
 
-                Logger.Info($"GetFieldValues({idInstance}) returned {MagmaConverse.Framework.Serialization.Json.Serialize(response)}");
+                Logger.Info($"GetFieldValues({idInstance}) returned {Magmasystems.Framework.Serialization.Json.Serialize(response)}");
                 return response;
             }
             catch (Exception exc)

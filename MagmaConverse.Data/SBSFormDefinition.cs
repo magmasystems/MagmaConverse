@@ -1,6 +1,6 @@
 ﻿using System.Runtime.Serialization;
-using MagmaConverse.Framework.Core;
-using MagmaConverse.Persistence.Interfaces;
+using Magmasystems.Framework.Core;
+using Magmasystems.Persistence.Interfaces;
 using MongoDB.Bson.Serialization.Attributes;
 using Newtonsoft.Json;
 

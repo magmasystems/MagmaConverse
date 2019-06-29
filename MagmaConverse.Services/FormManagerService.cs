@@ -9,8 +9,8 @@ using System.Threading.Tasks;
 using MagmaConverse.Controllers;
 using MagmaConverse.Data;
 using MagmaConverse.Data.Workflow;
-using MagmaConverse.Framework;
-using MagmaConverse.Framework.Core;
+using Magmasystems.Framework;
+using Magmasystems.Framework.Core;
 using MagmaConverse.Interfaces;
 using MagmaConverse.Models;
 

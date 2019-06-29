@@ -17,15 +17,13 @@
     <ProjectReference Include="..\SwaggerWcf\SwaggerWcf.csproj" />
     <ProjectReference Include="..\MagmaConverse.Shims\MagmaConverse.Shims.csproj" />
     <ProjectReference Include="..\MagmaConverse.Controllers\MagmaConverse.Controllers.csproj" />
-    <ProjectReference Include="..\MagmaConverse.Persistence.MongoDB\MagmaConverse.Persistence.MongoDB.csproj" />
-    <ProjectReference Include="..\MagmaConverse.Persistence\MagmaConverse.Persistence.csproj" />
     <ProjectReference Include="..\MagmaConverse.Wrkflow\MagmaConverse.Workflow.csproj" />
-    <ProjectReference Include="..\MagmaConverse.Utilities\MagmaConverse.Utilities.csproj" />
     <ProjectReference Include="..\MagmaConverse.Mocks\MagmaConverse.Mocks.csproj" />
     <ProjectReference Include="..\MagmaConverse.Messaging.Kafka\MagmaConverse.Messaging.Kafka.csproj" />
-    <ProjectReference Include="..\MagmaConverse.Framework\MagmaConverse.Framework.csproj" />
     <ProjectReference Include="..\MagmaConverse.Data\MagmaConverse.Data.csproj" />
     <ProjectReference Include="..\MagmaConverse.Configuration\MagmaConverse.Configuration.csproj" />
+    <ProjectReference Include="..\Magmasystems.Persistence\Magmasystems.Persistence.csproj" />
+    <ProjectReference Include="..\Magmasystems.Framework\Magmasystems.Framework.csproj" />
   </ItemGroup>
   <ItemGroup>
     <PackageReference Include="log4net" Version="2.0.8" />

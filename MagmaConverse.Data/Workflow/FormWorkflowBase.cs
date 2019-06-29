@@ -2,7 +2,7 @@
 using System.Threading;
 using System.Threading.Tasks;
 using MagmaConverse.Configuration;
-using MagmaConverse.Framework;
+using Magmasystems.Framework;
 using log4net;
 
 namespace MagmaConverse.Data.Workflow

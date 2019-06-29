@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Runtime.Serialization;
 using MagmaConverse.Data.Fields;
-using MagmaConverse.Framework;
+using Magmasystems.Framework;
 using MagmaConverse.Interfaces;
 using Newtonsoft.Json;
 

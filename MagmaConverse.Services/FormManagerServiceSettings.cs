@@ -1,5 +1,5 @@
 using System.Runtime.Serialization;
-using MagmaConverse.Framework;
+using Magmasystems.Framework;
 using MagmaConverse.Interfaces;
 
 namespace MagmaConverse.Services

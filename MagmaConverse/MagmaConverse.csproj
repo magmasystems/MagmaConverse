@@ -16,9 +16,9 @@
 
   <ItemGroup>
     <ProjectReference Include="..\SwaggerWcf\SwaggerWcf.csproj" />
-    <ProjectReference Include="..\MagmaConverse.Framework\MagmaConverse.Framework.csproj" />
     <ProjectReference Include="..\MagmaConverse.Data\MagmaConverse.Data.csproj" />
     <ProjectReference Include="..\MagmaConverse.Services\MagmaConverse.Services.csproj" />
+    <ProjectReference Include="..\Magmasystems.Persistence.MongoDB\Magmasystems.Persistence.MongoDB.csproj" />
   </ItemGroup>
   <ItemGroup>
     <Content Remove="log4net.config" />

@@ -15,9 +15,10 @@
     <PackageReference Include="log4net" Version="2.0.8" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\MagmaConverse.Utilities\MagmaConverse.Utilities.csproj" />
     <ProjectReference Include="..\MagmaConverse.Services\MagmaConverse.Services.csproj" />
     <ProjectReference Include="..\MagmaConverse.Shims\MagmaConverse.Shims.csproj" />
+    <ProjectReference Include="..\Magmasystems.Framework\Magmasystems.Framework.csproj" />
+    <ProjectReference Include="..\Magmasystems.Persistence.MongoDB\Magmasystems.Persistence.MongoDB.csproj" />
   </ItemGroup>
   <ItemGroup>
     <None Update="log4net.config">

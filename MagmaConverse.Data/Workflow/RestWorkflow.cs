@@ -2,8 +2,8 @@
 using System.IO;
 using System.Net;
 using System.Text;
-using MagmaConverse.Framework;
-using MagmaConverse.Framework.Serialization;
+using Magmasystems.Framework;
+using Magmasystems.Framework.Serialization;
 using MagmaConverse.Mocks;
 
 namespace MagmaConverse.Data.Workflow

@@ -1,6 +1,5 @@
 ﻿using MagmaConverse.Data;
-using MagmaConverse.Framework;
-using MagmaConverse.Utilities;
+using Magmasystems.Framework;
 
 namespace MagmaConverse.Views.Console
 {

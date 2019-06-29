@@ -1,6 +1,6 @@
 ﻿using System;
 using MagmaConverse.Data.Fields;
-using MagmaConverse.Framework;
+using Magmasystems.Framework;
 using log4net;
 
 namespace MagmaConverse.Data

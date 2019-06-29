@@ -1,5 +1,5 @@
 ﻿using System;
-using MagmaConverse.Framework.Core;
+using Magmasystems.Framework.Core;
 
 namespace MagmaConverse.Data.Workflow
 {
