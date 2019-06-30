@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Configuration;
 using System.Linq.Expressions;
+using MagmaConverse.Configuration;
 using Magmasystems.Framework;
 using Magmasystems.Persistence.Interfaces;
 
@@ -51,7 +52,7 @@ namespace Magmasystems.Persistence
 
 			string adapterName = databaseVendorName + "Adapter";
 
-			this.AdapterConfig = ConfigurationManager.GetSection(adapterName) as DocumentDatabaseAdapterConfiguration;
+			this.AdapterConfig = MagmaConverseConfiguration.GetSection(adapterName) as DocumentDatabaseAdapterConfiguration;
 			if (this.AdapterConfig == null)
 			{
 				throw new ApplicationException("No " + adapterName + " config section could be found in the App.config file");

@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Configuration;
+using System.Reflection;
 
 namespace MagmaConverse.Configuration
 {
@@ -7,7 +8,37 @@ namespace MagmaConverse.Configuration
     {
         public static MagmaConverseConfiguration Read()
         {
-            return ConfigurationManager.GetSection("MagmaConverse") is MagmaConverseConfiguration config ? config : new MagmaConverseConfiguration();
+            // There is an issue with .NET Core Unit Tests and config files, so you need to open the exe config
+            if (!(ConfigurationManager.GetSection("MagmaConverse") is MagmaConverseConfiguration config))
+            {
+                var location = Assembly.GetEntryAssembly().Location;
+                var appDomainName = AppDomain.CurrentDomain.FriendlyName;
+                if (appDomainName == "testhost")
+                    location = location.Replace("testhost", "MagmaConverse.Tests");
+                config = ConfigurationManager.OpenExeConfiguration(location).GetSection("MagmaConverse") as MagmaConverseConfiguration;
+            }
+
+            if (config == null)
+            {
+                config = new MagmaConverseConfiguration();
+            }
+
+            return config;
+        }
+
+        public static ConfigurationSection GetSection(string sectionName)
+        {
+            // There is an issue with .NET Core Unit Tests and config files, so you need to open the exe config
+            if (!(ConfigurationManager.GetSection(sectionName) is ConfigurationSection section))
+            {
+                var location = Assembly.GetEntryAssembly().Location;
+                var appDomainName = AppDomain.CurrentDomain.FriendlyName;
+                if (appDomainName == "testhost")
+                    location = location.Replace("testhost", "MagmaConverse.Tests");
+                section = ConfigurationManager.OpenExeConfiguration(location).GetSection(sectionName) as ConfigurationSection;
+            }
+
+            return section;
         }
 
         public string Evaluate(string configPath)
