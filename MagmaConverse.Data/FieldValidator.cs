@@ -27,8 +27,12 @@ namespace MagmaConverse.Data
 
         [DataMember(Name = "errormessage")]
         public string ValidationFailedMessage { get; set; } = "The field is not valid";
- 
-        protected FieldValidator(string name)
+
+        protected FieldValidator()
+        {
+        }
+
+        protected FieldValidator(string name) : this()
         {
             this.Name = name;
         }
@@ -74,6 +78,10 @@ namespace MagmaConverse.Data
 
         [DataMember(Name = "length")]
         public int Length { get; private set; }
+
+        public FieldLengthValidator()
+        {
+        }
 
         public FieldLengthValidator(int n, LengthComparator comparator = LengthComparator.EQ) : base("Length", "The field length is not correct")
         {
@@ -131,6 +139,10 @@ namespace MagmaConverse.Data
 
         private Regex CompiledRegex { get; }
 
+        public FieldRegexValidator()
+        {
+        }
+
         public FieldRegexValidator(string regex) : this(regex, RegexOptions.Compiled)
         {
         }
@@ -165,6 +177,10 @@ namespace MagmaConverse.Data
         [DataMember(Name = "max")]
         public double Max { get; }
 
+        public FieldNumericRangeValidator()
+        {
+        }
+
         public FieldNumericRangeValidator(int min = Int32.MinValue, int max = Int32.MaxValue, string errorMsg = "The value is not between the minimum and maximum values") : base("Range", errorMsg)
         {
             this.Min = min;
@@ -190,6 +206,10 @@ namespace MagmaConverse.Data
     {
         [DataMember(Name = "rules")]
         public List<FieldValidationRule> Rules { get; set; }
+
+        public FieldRulesValidator()
+        {
+        }
 
         public FieldRulesValidator(List<FieldValidationRule> rules, string errorMsg = "The value broke the rule") : base("Rules", errorMsg)
         {
@@ -222,7 +242,7 @@ namespace MagmaConverse.Data
 
     public static class ValidatorFactory
     {
-        public static IFieldValidator Create(string validator, params object[] args)
+        public static FieldValidator Create(string validator, params object[] args)
         {
             switch (validator.ToLower())
             {

@@ -27,7 +27,7 @@ namespace MagmaConverse.Data
         /// <summary>
         /// Unique Id of the definition of the form.
         /// </summary>
-        string DefinitionId { get; }
+        string DefinitionId { get; set; }
 
         /// <summary>
         /// The title that will be displayewd in the form
@@ -115,7 +115,7 @@ namespace MagmaConverse.Data
 
         /// <inheritdoc />
         [DataMember]
-        public string DefinitionId { get; }
+        public string DefinitionId { get; set; }
 
         /// <inheritdoc />
         [DataMember]
