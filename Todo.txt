@@ -1,0 +1,11 @@
+Implement more workflow items
+  Call a function
+    Provide the name/assembly of the class and a function to call
+  Send an email
+
+Implement fields that are just pure logic calls
+
+OnTrue/OnFalse actions should have more actions other than Jump
+  Look at the workflow items above
+
+x Email registration - wait until a link is activated

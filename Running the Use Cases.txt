@@ -1,0 +1,54 @@
+1) Run Mongo and Kafka (optional)
+
+Although it is not required, run Mongo and Kafka. If you do not run Mongo, you will get some warnings when the application starts, and you will not be able to retrieve any prior-saved forms.
+
+2) Create a form definition
+
+In order to create an instance of a Form Definition, you must put the form definition Json into the body of the post request.
+  URI = http://localhost:8089/FormManagerService/form/definition/create
+  Body = Json of the form definition
+
+Alternatively, you can load the form definition Json from an external file, and then pass that Json string into the body of the Create Form Definition's PUT call.
+
+First, assume we have the Json in a file called DIYOnboardingForm.json that has been copied into the app's ./bin directory.
+  URI = http://localhost:8089/FormManagerService/form/definition/load/DIYOnboardingForm
+
+We need to save the returned Json in a Postman environment variable. In the Postman test, do the following:
+  var jsonData = JSON.parse(responseBody);
+  postman.setGlobalVariable("DIYOnboarding-Form-Definition-Json", jsonData.Value);
+
+Then pass the Json into the CreateFormDefinition call above. In Postman, go into the Body section of the request and pass it the returned Json string.
+  URI = http://localhost:8089/FormManagerService/form/definition/create
+  Body = {{DIYOnboarding-Form-Definition-Json}}
+
+Whichever way you decide to create the form definition instance, you will get a response that has the definition's name and the id.
+  "Value":
+    [{
+      "name": "frmDIYCustomerOnboarding",
+      "id": "FormDefinition.15708d1a"
+    }]
+
+We can store the name and id into a Postman environment variable:
+  var jsonData = JSON.parse(responseBody);
+  postman.setGlobalVariable("DIYOnboarding-Form1-ID",   jsonData.Value[0].id);
+  postman.setGlobalVariable("DIYOnboarding-Form1-Name", jsonData.Value[0].name);
+
+3) Create an instance of the form
+
+Now that we have the id of a form definition, we can create an actual instance of the form.
+  URI = http://localhost:8089/FormManagerService/form/new/{{DIYOnboarding-Form1-ID}}
+
+You will get back a response that has the id of the new instance of the form
+  "Value": "FormInstance.frmDIYCustomerOnboarding.c522435d"
+
+The instance id is stored in an environment variable:
+  var jsonData = JSON.parse(responseBody);
+  postman.setGlobalVariable("DIYOnboarding-Form1-InstanceID", jsonData.Value);
+
+4) Run the form
+
+The instance of the form can be bound to a certain view and can be run.
+  URI = http://localhost:8089/FormManagerService/form/run/{{DIYOnboarding-Form1-InstanceID}}
+
+You can pass an optional view driver value as a query parameter. If this query param is omitted, the default value is "terminal".
+  ?view={driver}

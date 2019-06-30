@@ -1,0 +1,22 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netcoreapp3.0</TargetFramework>
+  </PropertyGroup>
+
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <OutputPath>..\bin\Debug</OutputPath>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <OutputPath>..\bin\Release</OutputPath>
+  </PropertyGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\MagmaConverse.Data\MagmaConverse.Data.csproj" />
+    <ProjectReference Include="..\MagmaConverse.Mocks\MagmaConverse.Mocks.csproj" />
+    <ProjectReference Include="..\MagmaConverse.Models\MagmaConverse.Models.csproj" />
+    <ProjectReference Include="..\Magmasystems.Framework\Magmasystems.Framework.csproj" />
+  </ItemGroup>
+  <ItemGroup>
+    <PackageReference Include="log4net" Version="2.0.8" />
+  </ItemGroup>
+</Project>
