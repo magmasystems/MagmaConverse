@@ -1,0 +1,767 @@
+{
+	"info": {
+		"_postman_id": "a7a56791-c5ee-1451-8247-35f746f46246",
+		"name": "MagmaConverse Run Form",
+		"description": "* Load the form definition from a file and save it to a Postman environment variable\n\n* Create the internal form definition from the contents of that Postman variable. Save the form definition id to a Postman environment variable\n\n* Fetch the form definition in two different ways to make sure that the form manager processed it correctly\n\n* Create an instance of the form from the definition id. Save the handle of the form instance to a Postman environment variable.\n\n* Tell the form manager to automate the input\n\n* Run the form, using all of the default values as the input\n\n\n\n",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Load the DIY Form Definition from a File",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "9fdcff0c-8dd0-4fb7-b140-43c677dbd848",
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {",
+							"    pm.response.to.have.status(200);",
+							"});",
+							"",
+							"var jsonData = JSON.parse(responseBody);",
+							"var formDef = jsonData.value;",
+							"postman.setGlobalVariable(\"DIYOnboarding-Form-Definition-Json\", formDef);",
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8089/FormManagerService/form/definition/load/{{DIYOnboarding-Form-Definiton-File}}",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8089",
+					"path": [
+						"FormManagerService",
+						"form",
+						"definition",
+						"load",
+						"{{DIYOnboarding-Form-Definiton-File}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Create Form Definition from Loaded Json",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "9733be85-fc1d-4256-b8dd-3abb7aa1b95f",
+						"exec": [
+							"tests[\"Status code is 201\"] = responseCode.code === 201;",
+							"",
+							"var jsonData = JSON.parse(responseBody);",
+							"var form1Id = jsonData.value[0].id;",
+							"postman.setGlobalVariable(\"DIYOnboarding-Form1-ID\", form1Id);",
+							"postman.setGlobalVariable(\"DIYOnboarding-Form1-Name\", jsonData.value[0].name);",
+							"",
+							"console.log(\"The saved form definition ID is\")",
+							"console.log(form1Id)"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{{DIYOnboarding-Form-Definition-Json}}"
+				},
+				"url": {
+					"raw": "http://localhost:8089/FormManagerService/form/definition/create",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8089",
+					"path": [
+						"FormManagerService",
+						"form",
+						"definition",
+						"create"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get Form Def by ID",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "4ab4dcee-0b90-4697-9366-e5b1356faae8",
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {",
+							"    pm.response.to.have.status(200);",
+							"});",
+							"",
+							"var jsonData = JSON.parse(responseBody);",
+							"var form1Id = jsonData.value.id;",
+							"var form1Name = jsonData.value.definition.name;",
+							"",
+							"pm.test(\"Form id matches\", function () {",
+							"    form1Id == pm.globals.get(\"DIYOnboarding-Form1-ID\");",
+							"});",
+							"pm.test(\"Form name matches\", function () {",
+							"    form1Name == pm.globals.get(\"DIYOnboarding-Form1-Name\");",
+							"});",
+							"pm.test(\"Form fields exist\", function () {",
+							"    jsonData.value.definition.fields.length > 0;",
+							"});",
+							"",
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8089/FormManagerService/form/definition/id/{{DIYOnboarding-Form1-ID}}",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8089",
+					"path": [
+						"FormManagerService",
+						"form",
+						"definition",
+						"id",
+						"{{DIYOnboarding-Form1-ID}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get Form Def by Name",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "e48cdc9f-1499-44f9-9c30-4ac8a0e08af3",
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {",
+							"    pm.response.to.have.status(200);",
+							"});",
+							"",
+							"var jsonData = JSON.parse(responseBody);",
+							"var form1Id = jsonData.value.id;",
+							"var form1Name = jsonData.value.definition.name;",
+							"",
+							"pm.test(\"Form id matches\", function () {",
+							"    form1Id == pm.globals.get(\"DIYOnboarding-Form1-ID\");",
+							"});",
+							"pm.test(\"Form name matches\", function () {",
+							"    form1Name == pm.globals.get(\"DIYOnboarding-Form1-Name\");",
+							"});",
+							"pm.test(\"Form fields exist\", function () {",
+							"    jsonData.value.definition.fields.length > 0;",
+							"});",
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8089/FormManagerService/form/definition/name/{{DIYOnboarding-Form1-Name}}",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8089",
+					"path": [
+						"FormManagerService",
+						"form",
+						"definition",
+						"name",
+						"{{DIYOnboarding-Form1-Name}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get All Form Definitions",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "78b7342d-72ce-4b37-a438-307c0f837688",
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {",
+							"    pm.response.to.have.status(200);",
+							"});",
+							"",
+							"pm.test(\"Status code is 200\", function () {",
+							"    pm.response.to.have.status(200);",
+							"});",
+							"",
+							"var jsonData = JSON.parse(responseBody);",
+							"var form1Id = jsonData.value[0].id;",
+							"var form1Name = jsonData.value[0].definition.name;",
+							"",
+							"pm.test(\"Form id matches\", function () {",
+							"    form1Id == pm.globals.get(\"DIYOnboarding-Form1-ID\");",
+							"});",
+							"pm.test(\"Form name matches\", function () {",
+							"    form1Name == pm.globals.get(\"DIYOnboarding-Form1-Name\");",
+							"});",
+							"pm.test(\"Form fields exist\", function () {",
+							"    jsonData.value[0].definition.fields.length > 0;",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8089/FormManagerService/form/definitions",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8089",
+					"path": [
+						"FormManagerService",
+						"form",
+						"definitions"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Create Instance of Form",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "c7014f07-73f4-4c38-8164-eb6f5ec9232e",
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {",
+							"    pm.response.to.have.status(200);",
+							"});",
+							"",
+							"var jsonData = JSON.parse(responseBody);",
+							"var form1Id = jsonData.value;",
+							"postman.setGlobalVariable(\"DIYOnboarding-Form1-InstanceID\", form1Id);",
+							"",
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8089/FormManagerService/form/new/{{DIYOnboarding-Form1-ID}}",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8089",
+					"path": [
+						"FormManagerService",
+						"form",
+						"new",
+						"{{DIYOnboarding-Form1-ID}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Insert Field at Index",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "c2ff89c8-0d69-4160-8ccc-cc6e13020199",
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {",
+							"    pm.response.to.have.status(200);",
+							"});",
+							"",
+							"var jsonData = JSON.parse(responseBody);",
+							"pm.test(\"Result is true\", function () {",
+							"    jsonData.value === true;",
+							"});",
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "PUT",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"index\": \"0\",\n    \"fields\": [\n\t    {\n\t        \"name\": \"newInsertedSection1\",\n\t        \"prompt\": \"This section tests inserting a field before the first field\",\n\t        \"type\": \"section\"\n\t    }\n    ]\n}\n"
+				},
+				"url": {
+					"raw": "http://localhost:8089/FormManagerService/form/{{DIYOnboarding-Form1-InstanceID}}/field/insert",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8089",
+					"path": [
+						"FormManagerService",
+						"form",
+						"{{DIYOnboarding-Form1-InstanceID}}",
+						"field",
+						"insert"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Insert Field at Named Index",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "c2ff89c8-0d69-4160-8ccc-cc6e13020199",
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {",
+							"    pm.response.to.have.status(200);",
+							"});",
+							"",
+							"var jsonData = JSON.parse(responseBody);",
+							"pm.test(\"Result is true\", function () {",
+							"    jsonData.value === true;",
+							"});",
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "PUT",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"type": "text",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"target\": \"numEmployees\",\n    \"fields\": [\n\t    {\n\t        \"name\": \"newInsertedSection2\",\n\t        \"prompt\": \"This section tests inserting a field before the numEmployees field\",\n\t        \"type\": \"section\"\n\t    }\n    ]\n}\n"
+				},
+				"url": {
+					"raw": "http://localhost:8089/FormManagerService/form/{{DIYOnboarding-Form1-InstanceID}}/field/insert",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8089",
+					"path": [
+						"FormManagerService",
+						"form",
+						"{{DIYOnboarding-Form1-InstanceID}}",
+						"field",
+						"insert"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get Form Instance by ID",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "d15c2325-690e-47a3-93ef-bf06032ed8c6",
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {",
+							"    pm.response.to.have.status(200);",
+							"});",
+							"",
+							"var jsonData = JSON.parse(responseBody);",
+							"var form = jsonData.value",
+							"",
+							"pm.test(\"Form id matches\", function () {",
+							"    form.id == pm.globals.get(\"DIYOnboarding-Form1-InstanceID\");",
+							"});",
+							"pm.test(\"Form name matches\", function () {",
+							"    form.name == pm.globals.get(\"DIYOnboarding-Form1-Name\");",
+							"});",
+							"pm.test(\"Form fields exist\", function () {",
+							"    form.fields.length > 0;",
+							"});",
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8089/FormManagerService/form/{{DIYOnboarding-Form1-InstanceID}}",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8089",
+					"path": [
+						"FormManagerService",
+						"form",
+						"{{DIYOnboarding-Form1-InstanceID}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get a Field in a Form (valid name)",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "660c7355-6e86-446a-b081-7c43740c40e1",
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {",
+							"    pm.response.to.have.status(200);",
+							"});",
+							"",
+							"var jsonData = JSON.parse(responseBody);",
+							"var form = jsonData.value;",
+							"",
+							"pm.test(\"Form id matches\", function () {",
+							"    form.formid == pm.globals.get(\"DIYOnboarding-Form1-InstanceID\");",
+							"});",
+							"pm.test(\"Field name matches\", function () {",
+							"    form.name == \"FEIN\";",
+							"});",
+							"pm.test(\"Field validation exist\", function () {",
+							"    form.validationrules.length > 0;",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8089/FormManagerService/form/{{DIYOnboarding-Form1-InstanceID}}/field/FEIN",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8089",
+					"path": [
+						"FormManagerService",
+						"form",
+						"{{DIYOnboarding-Form1-InstanceID}}",
+						"field",
+						"FEIN"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get a Field in a Form (invalid name)",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "55c71525-2e26-4875-88c0-1acaa9099af0",
+						"exec": [
+							"tests[\"Status code is 404\"] = responseCode.code === 404;",
+							"",
+							"var jsonData = JSON.parse(responseBody);",
+							"tests[\"Field should be null\"] = jsonData.value === null;",
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8089/FormManagerService/form/{{DIYOnboarding-Form1-InstanceID}}/field/FEINX",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8089",
+					"path": [
+						"FormManagerService",
+						"form",
+						"{{DIYOnboarding-Form1-InstanceID}}",
+						"field",
+						"FEINX"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Automate Input",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "80771577-925a-4bfa-8bb6-6161355502d7",
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {",
+							"    pm.response.to.have.status(200);",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "PUT",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n  \"automateInput\": true,\n  \"maxRepeaterIterations\": 4\n}\n"
+				},
+				"url": {
+					"raw": "http://localhost:8089/FormManagerService/form/manager/settings",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8089",
+					"path": [
+						"FormManagerService",
+						"form",
+						"manager",
+						"settings"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Run Form by Instance ID",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "927f9a75-cb32-44fc-99b8-d620f09eeb7d",
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {",
+							"    pm.response.to.have.status(200);",
+							"});",
+							"",
+							"var jsonData = JSON.parse(responseBody);",
+							"",
+							"pm.test(\"Run Form returns true\", function () {",
+							"    jsonData.value === true;",
+							"});",
+							"",
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8089/FormManagerService/form/run/{{DIYOnboarding-Form1-InstanceID}}?view=terminal",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8089",
+					"path": [
+						"FormManagerService",
+						"form",
+						"run",
+						"{{DIYOnboarding-Form1-InstanceID}}"
+					],
+					"query": [
+						{
+							"key": "view",
+							"value": "terminal"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get Field Values for Form Instance",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "1fdc5809-4183-4cc1-8223-26a4f03ab167",
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {",
+							"    pm.response.to.have.status(200);",
+							"});",
+							"",
+							"var jsonData = JSON.parse(responseBody);",
+							"var formData = jsonData.value;",
+							"",
+							"pm.test(\"Test field values\", function () {",
+							"    formData.businessName === \"Marc's Pizza\";",
+							"    formData.numEmployees === 5;",
+							"    formData.bankRoutingNumber === \"123456789\";",
+							"});",
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8089/FormManagerService/form/{{DIYOnboarding-Form1-InstanceID}}/fields",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8089",
+					"path": [
+						"FormManagerService",
+						"form",
+						"{{DIYOnboarding-Form1-InstanceID}}",
+						"fields"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get Authorization Token",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "92101ae8-fb80-4e5e-a167-2c3419fef3ff",
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {",
+							"    pm.response.to.have.status(200);",
+							"});",
+							"",
+							"var jsonData = JSON.parse(responseBody);",
+							"postman.setGlobalVariable(\"DIYOnboarding-AuthToken\", jsonData.value);",
+							"",
+							"console.log(\"The token is\")",
+							"console.log(jsonData.value)"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8089/FormManagerService/auth/database?user=adlerm&password=12345",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8089",
+					"path": [
+						"FormManagerService",
+						"auth",
+						"database"
+					],
+					"query": [
+						{
+							"key": "user",
+							"value": "adlerm"
+						},
+						{
+							"key": "password",
+							"value": "12345"
+						}
+					]
+				}
+			},
+			"response": []
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"id": "16b77742-6460-4747-998e-419b4f3344d9",
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"id": "9e7c973c-5837-4a40-8689-827db0eb408b",
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		}
+	]
+}
