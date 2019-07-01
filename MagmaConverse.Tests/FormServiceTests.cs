@@ -74,7 +74,8 @@ namespace MagmaConverse.Tests
                 AutomatedInput = true, 
                 NoCreateRestService = true,
                 NoMessaging = true,
-                NoPersistence = true
+                NoPersistence = true,
+                MaxRepeaterIterations = 1
             };
 
             using (FormManagerService service = new FormManagerService(serviceSettings))
@@ -108,8 +109,14 @@ namespace MagmaConverse.Tests
 
                 // Detect when the form is done running
                 ManualResetEvent eventStop = new ManualResetEvent(false);
-                formInstance.Submitted += form => { eventStop.Set(); };
-                formInstance.Cancelled += form => { eventStop.Set(); };
+                formInstance.Submitted += form =>
+                {
+//                    eventStop.Set();
+                };
+                formInstance.Cancelled += form =>
+                {
+                    eventStop.Set();
+                };
                 service.RunFormEnded += form =>
                 {
                     if (form.Id == idFormInstance)
@@ -123,8 +130,11 @@ namespace MagmaConverse.Tests
 
                 // Wait for the form to end
                 bool rc = eventStop.WaitOne();
+                eventStop.Dispose();
                 Assert.IsTrue(rc, "The test timed out");
             }
+
+            Console.WriteLine("TestCreateAndRunDIYOnboardingForm: We reached the end of the test");
         }
 
         private void CreateAndRunForm(FormCreateRequest request)

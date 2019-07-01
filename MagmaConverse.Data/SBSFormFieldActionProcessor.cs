@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using log4net;
 using Magmasystems.Framework;
 using Newtonsoft.Json.Linq;
 
@@ -24,6 +25,8 @@ namespace MagmaConverse.Data
         private int CurrentIndex { get; }
         public FieldActionResult Result { get; }
 
+        private ILog Logger { get; }
+
         private static readonly IDictionary<string, Predicate<SBSFormField>> ActionPredicateMap = new Dictionary<string, Predicate<SBSFormField>>
         {
             { "always",     f => true  },
@@ -34,6 +37,12 @@ namespace MagmaConverse.Data
             { "onnull",     f => f.Value == null  },
             
         };
+
+        public SBSFormFieldActionProcessor()
+        {
+            this.Logger = LogManager.GetLogger(this.GetType());
+        }
+
 
         public SBSFormFieldActionProcessor(ISBSFormField field, int idxCurrent)
         {
@@ -47,41 +56,48 @@ namespace MagmaConverse.Data
 
         public virtual FieldActionResult PerformActions()
         {
-            if (this.Field.Actions == null)
-                return this.Result;
-
-            foreach (var action in this.Field.Actions)
+            try
             {
-                dynamic thingToDo = action.Value;            
-                if (thingToDo == null)
-                    continue;
+                if (this.Field.Actions == null)
+                    return this.Result;
 
-                if (ActionPredicateMap.TryGetValue(action.Key.ToLower(), out var predicate))
+                foreach (var action in this.Field.Actions)
                 {
-                    if (predicate(this.Field))
+                    var thingToDo = action.Value as JObject;
+                    if (thingToDo == null)
+                        continue;
+
+                    if (ActionPredicateMap.TryGetValue(action.Key.ToLower(), out var predicate))
                     {
-                        this.ExecuteJump(thingToDo)
-                            .ExecuteWorkflow(thingToDo);
+                        if (predicate(this.Field))
+                        {
+                            this.ExecuteJump(thingToDo)
+                                .ExecuteWorkflow(thingToDo);
+                        }
+                    }
+                    else
+                    {
+                        ConsoleHelpers.ColoredWriteLine($"Unknown field action {action.Key}", ConsoleColor.Red);
                     }
                 }
-                else
-                {
-                    ConsoleHelpers.ColoredWriteLine($"Unknown field action {action.Key}", ConsoleColor.Red);
-                }
+            }
+            catch (Exception exc)
+            {
+                Logger.Error(exc);
             }
 
             return this.Result;
         }
 
         // ReSharper disable once UnusedMethodReturnValue.Local
-        private SBSFormFieldActionProcessor ExecuteJump(dynamic thingToDo)
+        private SBSFormFieldActionProcessor ExecuteJump(JObject jumpObject)
         {
             /* "onTrue": { "jump": "sectionAfterSignatory" } */
-            this.Result.NewIndex = this.CalculateJumpIndex(thingToDo.jump);
+            this.Result.NewIndex = this.CalculateJumpIndex(jumpObject["jump"]);
             return this;
         }
 
-        private int CalculateJumpIndex(JValue jumpTarget)
+        private int CalculateJumpIndex(JToken jumpTarget)
         {
             if (jumpTarget == null)
                 return this.CurrentIndex;
@@ -90,10 +106,10 @@ namespace MagmaConverse.Data
             return idxNew < 0 ? this.CurrentIndex : idxNew;
         }
 
-        private SBSFormFieldActionProcessor ExecuteWorkflow(dynamic thingToDo)
+        private SBSFormFieldActionProcessor ExecuteWorkflow(JObject thingToDo)
         {
             /* "onTrue": { "submissionFunctions": [ {}, {} ] } */
-            JArray jFunctions = thingToDo.submissionFunctions;
+            var jFunctions = thingToDo["submissionFunctions"] as JArray;
             if (jFunctions == null)
                 return this;
 

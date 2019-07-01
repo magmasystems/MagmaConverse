@@ -135,7 +135,7 @@
         {
           "name": "photo",
           "prompt": "Upload a photo of yourself",
-          "default": "C:/builds/now/web/images/hybrid/@run/splash_wholesale.jpg",
+          "default": "./resources/images/sample.jpg",
           "type": "upload",
           "properties": {
             "target":  "database",

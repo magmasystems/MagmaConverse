@@ -47,28 +47,33 @@ namespace MagmaConverse.Views.Console
 
             Properties props = this.SBSFormField.Properties;
 
-            // We need to know where to upload the contents to. It could be to a database, another file on the server, or an in-memory cache on the server.
-            using (FileStream fs = new FileStream(filename, FileMode.Open))
+            try
             {
-                var len = fs.Length;
-                var chunksize = props?.Get("chunksize", (int) len) ?? (int) len;
-                var offset = 0;
-                var data = new byte[chunksize];
-
-                while (len > 0)
+                // We need to know where to upload the contents to. It could be to a database, another file on the server, or an in-memory cache on the server.
+                using (FileStream fs = new FileStream(filename, FileMode.Open))
                 {
-                    int n = fs.Read(data, offset, chunksize);
-                    len -= n;
-                    offset += n;
+                    var len = fs.Length;
+                    var chunksize = props?.Get("chunksize", (int) len) ?? (int) len;
+                    var offset = 0;
+                    var data = new byte[chunksize];
 
-                    // TODO - transfer the chunk
+                    while (len > 0)
+                    {
+                        int n = fs.Read(data, offset, chunksize);
+                        len -= n;
+                        offset += n;
+
+                        // TODO - transfer the chunk
+                    }
+
+                    uploadField.UploadedData = data;
+                    uploadField.WasUploaded = true;
+                    uploadField.Length = fs.Length;
                 }
-
-                uploadField.UploadedData = data;
-                uploadField.WasUploaded = true;
-                uploadField.Length = fs.Length;
             }
-
+            catch (Exception exc)
+            {
+            }
             return rc;
         }
     }

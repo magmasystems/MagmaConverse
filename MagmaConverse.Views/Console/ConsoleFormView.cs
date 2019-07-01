@@ -57,6 +57,7 @@ namespace MagmaConverse.Views.Console
             {
                 IConsoleFieldView field = fields[idx];
                 field.Render();
+                this.Logger.Info($"ConsoleFormView: Rendered field {field.SBSFormField.Name} with value {field.SBSFormField.Value}");
                 if (field is ConsoleRepeaterField repeater)
                 {
                     // The max repeater iterations can be controlled by a global property defined in the App Context

@@ -24,6 +24,7 @@
     <Content Remove="log4net.config" />
     <Content Remove="App.config" />
     <Content Remove="DIYOnboardingForm.json" />
+    <Content Remove="resources\images\sample.jpg" />
   </ItemGroup>
   <ItemGroup>
     <None Include="log4net.config">
@@ -33,6 +34,9 @@
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
     <None Include="DIYOnboardingForm.json">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="resources\images\sample.jpg">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
   </ItemGroup>

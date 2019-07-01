@@ -1,6 +1,7 @@
 ﻿using System;
 using System.ComponentModel;
 using System.Runtime.CompilerServices;
+using log4net;
 using MagmaConverse.Data;
 using MagmaConverse.Views.Annotations;
 
@@ -19,12 +20,14 @@ namespace MagmaConverse.Views
         #region Variables
         /// <inheritdoc/>
         public ISBSForm Form { get; protected set; }
+        protected ILog Logger { get; }
         #endregion
 
         #region Constructors
         protected SBSFormViewBase(ISBSForm form)
         {
             this.Form = form;
+            this.Logger = LogManager.GetLogger(this.GetType());
         }
         #endregion
 

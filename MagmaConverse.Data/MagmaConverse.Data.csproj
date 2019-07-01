@@ -13,6 +13,8 @@
   <ItemGroup>
     <PackageReference Include="Jint" Version="3.0.0-beta-1525" />
     <PackageReference Include="MongoDB.Bson" Version="2.8.1" />
+    <PackageReference Include="Microsoft.CSharp" Version="4.5.0" />
+    <PackageReference Include="System.Dynamic.Runtime" Version="4.3.0" />
   </ItemGroup>
   <ItemGroup>
     <None Remove=".DS_Store" />
