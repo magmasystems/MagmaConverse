@@ -12,6 +12,16 @@
             "problemMatcher": "$tsc"
         },
         {
+            "label": "build test",
+            "command": "dotnet",
+            "type": "process",
+            "args": [
+                "build",
+                "${workspaceFolder}/MagmaConverse.Tests/MagmaConverse.Tests.csproj"
+            ],
+            "problemMatcher": "$tsc"
+        },
+        {
             "label": "publish",
             "command": "dotnet",
             "type": "process",

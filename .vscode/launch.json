@@ -4,6 +4,23 @@
    // For further information visit https://github.com/OmniSharp/omnisharp-vscode/blob/master/debugger-launchjson.md
    "version": "0.2.0",
    "configurations": [
+       {
+           "name": ".NET Core Launch (web)",
+           "type": "coreclr",
+           "request": "launch",
+           "preLaunchTask": "build",
+           "program": "${workspaceFolder}/bin/Debug/netcoreapp3.0/MagmaConverse.dll",
+           "args": [],
+           "cwd": "${workspaceFolder}/bin/Debug/netcoreapp3.0",
+           "stopAtEntry": false,
+           "env": {
+               "ASPNETCORE_ENVIRONMENT": "Development"
+           },
+           "sourceFileMap": {
+               "/Views": "${workspaceFolder}/Views"
+           }
+       },
+       
         {
             "name": ".NET Core Launch (console)",
             "type": "coreclr",

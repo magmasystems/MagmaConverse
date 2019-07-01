@@ -66,6 +66,67 @@ namespace MagmaConverse.Tests
             this.CreateAndRunForm(request);
         }
 
+        [TestMethod]
+        public void TestCreateAndRunDIYOnboardingForm()
+        {
+            var serviceSettings = new FormManagerServiceSettings 
+            { 
+                AutomatedInput = true, 
+                NoCreateRestService = true,
+                NoMessaging = true,
+                NoPersistence = true
+            };
+
+            using (FormManagerService service = new FormManagerService(serviceSettings))
+            {
+                // Load the form definition
+                var loadDefResponse = service.LoadFormDefinitionFromFile("./DIYOnboardingForm.json");
+                Assert.IsNotNull(loadDefResponse);
+                Assert.AreEqual(loadDefResponse.StatusCode, ResponseStatusCodes.OK);
+
+                var createRequest = Json.Deserialize<FormCreateRequest>(loadDefResponse.Value);
+                Assert.IsNotNull(createRequest);
+
+                // Create the internal form definition
+                var createResponse = service.CreateForm(createRequest);
+                Assert.IsNotNull(createResponse);
+                Assert.AreEqual(createResponse.StatusCode, ResponseStatusCodes.OK);
+                Assert.IsNotNull(createResponse.Value);
+
+                // We should get back an array of name/value pairs
+                var formDefId = createResponse.Value[0].Id;
+                
+                // Create an instance of the DIYOnboarding form from the template
+                var newformResponse = service.NewForm(formDefId);
+                Assert.IsNotNull(newformResponse);
+                Assert.AreEqual(newformResponse.StatusCode, ResponseStatusCodes.OK);
+
+                // Read the instance and make sure it really exists
+                var idFormInstance = newformResponse.Value;
+                var formInstance = SBSFormModel.Instance.GetFormInstance(idFormInstance);
+                Assert.IsNotNull(formInstance);
+
+                // Detect when the form is done running
+                ManualResetEvent eventStop = new ManualResetEvent(false);
+                formInstance.Submitted += form => { eventStop.Set(); };
+                formInstance.Cancelled += form => { eventStop.Set(); };
+                service.RunFormEnded += form =>
+                {
+                    if (form.Id == idFormInstance)
+                        eventStop.Set();
+                };
+
+                // Run the form asynchronously
+                var runformResponse = service.RunForm(idFormInstance);
+                Assert.IsNotNull(runformResponse);
+                Assert.AreEqual(runformResponse.StatusCode, ResponseStatusCodes.OK);
+
+                // Wait for the form to end
+                bool rc = eventStop.WaitOne();
+                Assert.IsTrue(rc, "The test timed out");
+            }
+        }
+
         private void CreateAndRunForm(FormCreateRequest request)
         {
             using (FormManagerService service = new FormManagerService(new FormManagerServiceSettings { AutomatedInput = true } ))
