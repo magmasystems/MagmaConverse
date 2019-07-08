@@ -2,6 +2,7 @@
 using System.Net;
 using System.Net.Mail;
 using System.Threading;
+using System.Threading.Tasks;
 using MagmaConverse.Data;
 using MagmaConverse.Data.Workflow;
 using MagmaConverse.Models;
@@ -67,7 +68,12 @@ namespace MagmaConverse.Workflow
 
         private bool SendMail(string to, string subject, string body)
         {
-            const string from = "marc@ctoasaservice.org";
+            string from = this.GetWorkflowConfigurationProperty("smtpFrom");
+            if (string.IsNullOrEmpty(from))
+            {
+                throw new ApplicationException("The smtpFrom section in the registerUser workflow are empty");
+            }
+
             MailMessage mail = new MailMessage(from, to)
             {
                 IsBodyHtml = true,
@@ -102,6 +108,24 @@ namespace MagmaConverse.Workflow
 
             try
             {
+                return this.SendMailSync(mail, client);
+            }
+            catch (Exception exc)
+            {
+                this.Logger.Error(exc.Message);
+                return false;
+            }
+            finally
+            {
+                mail.Dispose();
+                client.Dispose();
+            }
+        }
+
+        private bool SendMailSync(MailMessage mail, SmtpClient client)
+        {
+            try
+            {
                 client.Send(mail);
                 return true;
             }
@@ -112,6 +136,26 @@ namespace MagmaConverse.Workflow
             }
             finally
             {
+                mail.Dispose();
+                client.Dispose();
+            }
+        }
+
+        private async Task<bool> SendMailAsync(MailMessage mail, SmtpClient client)
+        {
+            try
+            {
+                await client.SendMailAsync(mail);
+                return true;
+            }
+            catch (Exception exc)
+            {
+                this.Logger.Error(exc.Message);
+                return false;
+            }
+            finally
+            {
+                mail.Dispose();
                 client.Dispose();
             }
         }

@@ -18,11 +18,12 @@ namespace MagmaConverse.Controllers
     [ApiController]
     public class FormManagerServiceController : BaseController, IFormManagerRestServiceContract
     {
-        private IFormManagerService Service { get; set; }
+        private IFormManagerService Service { get; }
 
-        public FormManagerServiceController()
+        public FormManagerServiceController(IFormManagerService service)
         {
-            this.Service = new FormManagerService();
+            //this.Service = new FormManagerService();
+            this.Service = service;
         }
 
         #region REST Methods

@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using MagmaConverse.Services;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
@@ -34,6 +35,8 @@ namespace MagmaConverse
                     // options.SerializerSettings.Converters.Add(new StringEnumConverter { NamingStrategy = new CamelCaseNamingStrategy() });
                     // options.SerializerSettings.TraceWriter = new MemoryTraceWriter();
                 });
+
+            services.AddSingleton<IFormManagerService, FormManagerService>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
